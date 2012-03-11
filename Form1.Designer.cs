@@ -42,11 +42,18 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.OVOutput = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.configDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -64,7 +71,7 @@
             // buttonLeveBrowse
             // 
             this.buttonLeveBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLeveBrowse.Location = new System.Drawing.Point(338, 19);
+            this.buttonLeveBrowse.Location = new System.Drawing.Point(358, 17);
             this.buttonLeveBrowse.Name = "buttonLeveBrowse";
             this.buttonLeveBrowse.Size = new System.Drawing.Size(75, 23);
             this.buttonLeveBrowse.TabIndex = 1;
@@ -80,13 +87,13 @@
             this.textBox1.Location = new System.Drawing.Point(6, 19);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(326, 20);
+            this.textBox1.Size = new System.Drawing.Size(346, 20);
             this.textBox1.TabIndex = 0;
             // 
             // levelDialog
             // 
             this.levelDialog.FileName = "openFileDialog1";
-            this.levelDialog.Filter = "\"evel.dat|level.dat";
+            this.levelDialog.Filter = "level.dat|level.dat";
             // 
             // process1
             // 
@@ -104,14 +111,14 @@
             this.groupBox2.Controls.Add(this.textBox2);
             this.groupBox2.Location = new System.Drawing.Point(6, 63);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(419, 56);
+            this.groupBox2.Size = new System.Drawing.Size(439, 56);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Output folder";
             // 
             // buttonDirBrowse
             // 
-            this.buttonDirBrowse.Location = new System.Drawing.Point(338, 19);
+            this.buttonDirBrowse.Location = new System.Drawing.Point(358, 19);
             this.buttonDirBrowse.Name = "buttonDirBrowse";
             this.buttonDirBrowse.Size = new System.Drawing.Size(75, 23);
             this.buttonDirBrowse.TabIndex = 1;
@@ -124,7 +131,7 @@
             this.textBox2.Location = new System.Drawing.Point(6, 19);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(326, 20);
+            this.textBox2.Size = new System.Drawing.Size(346, 20);
             this.textBox2.TabIndex = 0;
             // 
             // outputDir
@@ -138,7 +145,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 13);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(439, 171);
+            this.tabControl1.Size = new System.Drawing.Size(482, 173);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -148,18 +155,19 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(431, 145);
+            this.tabPage1.Size = new System.Drawing.Size(474, 147);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Simple Mode";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Controls.Add(this.linkLabel1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(431, 145);
+            this.tabPage2.Size = new System.Drawing.Size(474, 147);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Advanced Mode";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -175,17 +183,72 @@
             this.linkLabel1.Text = "What\'s advanced mode?";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
+            // OVOutput
+            // 
+            this.OVOutput.Location = new System.Drawing.Point(12, 196);
+            this.OVOutput.Multiline = true;
+            this.OVOutput.Name = "OVOutput";
+            this.OVOutput.ReadOnly = true;
+            this.OVOutput.Size = new System.Drawing.Size(323, 242);
+            this.OVOutput.TabIndex = 3;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(341, 196);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(149, 51);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Start Render";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.textBox4);
+            this.groupBox3.Controls.Add(this.button2);
+            this.groupBox3.Location = new System.Drawing.Point(15, 13);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(453, 58);
+            this.groupBox3.TabIndex = 1;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Overviewer Config File";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(372, 19);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 0;
+            this.button2.Text = "Browse";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(11, 21);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
+            this.textBox4.Size = new System.Drawing.Size(355, 20);
+            this.textBox4.TabIndex = 1;
+            // 
+            // configDialog
+            // 
+            this.configDialog.Filter = "Python Files|*.py|All Files|*.*";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(463, 421);
+            this.ClientSize = new System.Drawing.Size(506, 450);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.OVOutput);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Overviewer GUI";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -194,7 +257,10 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -213,6 +279,12 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox OVOutput;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.OpenFileDialog configDialog;
     }
 }
 
