@@ -74,30 +74,48 @@ namespace OverviewerGUI
 
         private void simpleRender(string worldDir, string outDir)
         {
-            Process p = new Process();
-            p.StartInfo.RedirectStandardError = true;
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.CreateNoWindow = true;
-            p.StartInfo.FileName = "overviewer.exe";
-            p.StartInfo.Arguments = "\"" + worldDir + "\" \"" + outDir + "\" ";
+            Process proc = new Process();
 
-            p.OutputDataReceived += new DataReceivedEventHandler (
-                (s, e) =>
-                {
-                    Console.WriteLine(e.Data);
-                }
-            );
-            p.ErrorDataReceived += new DataReceivedEventHandler((s, e) => { Console.WriteLine(e.Data); });
+            proc.StartInfo.FileName = @"cmd";
+            proc.StartInfo.Arguments = "/c overviewer.exe \"" + worldDir + "\" \"" + outDir + "\" ";
+            // set up output redirection
+            proc.StartInfo.RedirectStandardOutput = true;
+            proc.StartInfo.RedirectStandardError = true;
+            proc.EnableRaisingEvents = true;
+            proc.StartInfo.CreateNoWindow = true;
+            proc.StartInfo.UseShellExecute = false;
+            // see below for output handler
+            proc.ErrorDataReceived += proc_DataReceived;
+            proc.OutputDataReceived += proc_DataReceived;
+            proc.Start();
+            proc.BeginErrorReadLine();
+            proc.BeginOutputReadLine();
 
-            p.Start();
-            p.BeginOutputReadLine();
+            proc.WaitForExit();
 
         }
 
         private void configRender(String config)
         {
-            throw new NotImplementedException();
+            Process proc = new Process();
+
+            proc.StartInfo.FileName = @"cmd";
+            proc.StartInfo.Arguments = "/c overviewer.exe --config=\"" + config + "\" ";
+            // set up output redirection
+            proc.StartInfo.RedirectStandardOutput = true;
+            proc.StartInfo.RedirectStandardError = true;
+            proc.EnableRaisingEvents = true;
+            proc.StartInfo.CreateNoWindow = true;
+            proc.StartInfo.UseShellExecute = false;
+            // see below for output handler
+            proc.ErrorDataReceived += proc_DataReceived;
+            proc.OutputDataReceived += proc_DataReceived;
+            proc.Start();
+            proc.BeginErrorReadLine();
+            proc.BeginOutputReadLine();
+
+            //proc.WaitForExit();
+
         }
 
         private void button2_Click_1(object sender, EventArgs e)
@@ -109,5 +127,11 @@ namespace OverviewerGUI
                 configFile = configDialog.FileName;
             }
         }
+
+        void proc_DataReceived(object sender, DataReceivedEventArgs e)
+        {
+            Console.WriteLine(e.Data);
+        }
+
     }
 }

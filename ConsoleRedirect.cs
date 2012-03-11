@@ -18,8 +18,8 @@ namespace OverviewerGUI
 
         public override void Write(char value)
         {
-            base.Write(value);
-            _output.AppendText(value.ToString()); // When character data is written, append it to the text box.
+            MethodInvoker action = delegate { _output.AppendText(value.ToString()); };
+            _output.BeginInvoke(action);
         }
 
         public override Encoding Encoding
