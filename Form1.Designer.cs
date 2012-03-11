@@ -208,14 +208,14 @@
             this.OVOutput.Name = "OVOutput";
             this.OVOutput.ReadOnly = true;
             this.OVOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.OVOutput.Size = new System.Drawing.Size(323, 242);
+            this.OVOutput.Size = new System.Drawing.Size(362, 242);
             this.OVOutput.TabIndex = 3;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(341, 196);
+            this.button1.Location = new System.Drawing.Point(380, 196);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(149, 51);
+            this.button1.Size = new System.Drawing.Size(110, 35);
             this.button1.TabIndex = 4;
             this.button1.Text = "Start Render";
             this.button1.UseVisualStyleBackColor = true;
