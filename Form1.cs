@@ -90,9 +90,6 @@ namespace OverviewerGUI
             proc.Start();
             proc.BeginErrorReadLine();
             proc.BeginOutputReadLine();
-
-            proc.WaitForExit();
-
         }
 
         private void configRender(String config)
@@ -113,9 +110,6 @@ namespace OverviewerGUI
             proc.Start();
             proc.BeginErrorReadLine();
             proc.BeginOutputReadLine();
-
-            //proc.WaitForExit();
-
         }
 
         private void button2_Click_1(object sender, EventArgs e)
