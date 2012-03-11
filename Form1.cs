@@ -90,6 +90,8 @@ namespace OverviewerGUI
             proc.Start();
             proc.BeginErrorReadLine();
             proc.BeginOutputReadLine();
+            proc.Exited += new EventHandler(ProcessExited);
+
         }
 
         private void configRender(String config)
@@ -108,8 +110,11 @@ namespace OverviewerGUI
             proc.ErrorDataReceived += proc_DataReceived;
             proc.OutputDataReceived += proc_DataReceived;
             proc.Start();
+
             proc.BeginErrorReadLine();
             proc.BeginOutputReadLine();
+            proc.Exited += new EventHandler(ProcessExited);
+
         }
 
         private void button2_Click_1(object sender, EventArgs e)
@@ -125,6 +130,10 @@ namespace OverviewerGUI
         void proc_DataReceived(object sender, DataReceivedEventArgs e)
         {
             Console.WriteLine(e.Data);
+        }
+        private void ProcessExited(Object sender, EventArgs e)
+        {
+            Console.WriteLine("The render is complete! Go to " + outDir + " and click index.html to view it! :)");
         }
 
     }
