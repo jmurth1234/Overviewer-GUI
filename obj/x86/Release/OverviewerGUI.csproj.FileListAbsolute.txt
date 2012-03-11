@@ -1,7 +1,0 @@
-C:\Users\Ryan.rymate-laptop\documents\visual studio 2010\Projects\OverviewerGUI\OverviewerGUI\bin\Release\OverviewerGUI.exe
-C:\Users\Ryan.rymate-laptop\documents\visual studio 2010\Projects\OverviewerGUI\OverviewerGUI\bin\Release\OverviewerGUI.pdb
-C:\Users\Ryan.rymate-laptop\documents\visual studio 2010\Projects\OverviewerGUI\OverviewerGUI\obj\x86\Release\OverviewerGUI.Form1.resources
-C:\Users\Ryan.rymate-laptop\documents\visual studio 2010\Projects\OverviewerGUI\OverviewerGUI\obj\x86\Release\OverviewerGUI.Properties.Resources.resources
-C:\Users\Ryan.rymate-laptop\documents\visual studio 2010\Projects\OverviewerGUI\OverviewerGUI\obj\x86\Release\OverviewerGUI.csproj.GenerateResource.Cache
-C:\Users\Ryan.rymate-laptop\documents\visual studio 2010\Projects\OverviewerGUI\OverviewerGUI\obj\x86\Release\OverviewerGUI.exe
-C:\Users\Ryan.rymate-laptop\documents\visual studio 2010\Projects\OverviewerGUI\OverviewerGUI\obj\x86\Release\OverviewerGUI.pdb
