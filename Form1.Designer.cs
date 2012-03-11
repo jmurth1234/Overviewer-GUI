@@ -32,7 +32,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonLeveBrowse = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.levelDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.buttonDirBrowse = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -47,6 +46,7 @@
             this.OVOutput = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.configDialog = new System.Windows.Forms.OpenFileDialog();
+            this.LevelDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -65,12 +65,12 @@
             this.groupBox1.Size = new System.Drawing.Size(439, 51);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "World to Render";
+            this.groupBox1.Text = "World Folder";
             // 
             // buttonLeveBrowse
             // 
             this.buttonLeveBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLeveBrowse.Location = new System.Drawing.Point(358, 17);
+            this.buttonLeveBrowse.Location = new System.Drawing.Point(358, 19);
             this.buttonLeveBrowse.Name = "buttonLeveBrowse";
             this.buttonLeveBrowse.Size = new System.Drawing.Size(75, 23);
             this.buttonLeveBrowse.TabIndex = 1;
@@ -88,11 +88,6 @@
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(346, 20);
             this.textBox1.TabIndex = 0;
-            // 
-            // levelDialog
-            // 
-            this.levelDialog.FileName = "openFileDialog1";
-            this.levelDialog.Filter = "level.dat|level.dat";
             // 
             // groupBox2
             // 
@@ -125,7 +120,7 @@
             // 
             // outputDir
             // 
-            this.outputDir.RootFolder = System.Environment.SpecialFolder.MyComputer;
+            this.outputDir.Description = "Select where the Overviewer will save the html files and render to";
             // 
             // tabControl1
             // 
@@ -225,6 +220,10 @@
             // 
             this.configDialog.Filter = "Python Files|*.py|All Files|*.*";
             // 
+            // LevelDialog
+            // 
+            this.LevelDialog.Description = "Select the folder that the level.dat of your world resides in.";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -259,7 +258,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button buttonLeveBrowse;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.OpenFileDialog levelDialog;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button buttonDirBrowse;
         private System.Windows.Forms.TextBox textBox2;
@@ -274,6 +272,7 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.OpenFileDialog configDialog;
+        private System.Windows.Forms.FolderBrowserDialog LevelDialog;
     }
 }
 

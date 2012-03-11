@@ -36,11 +36,11 @@ namespace OverviewerGUI
         private void button1_Click(object sender, EventArgs e)
         {
             // Show the dialog and get result.
-            DialogResult result = levelDialog.ShowDialog();
+            DialogResult result = LevelDialog.ShowDialog();
             if (result == DialogResult.OK) // Test result.
             {
-                textBox1.Text = levelDialog.FileName;
-                worldDir = levelDialog.FileName;
+                textBox1.Text = LevelDialog.SelectedPath;
+                worldDir = LevelDialog.SelectedPath;
             }
         }
 
