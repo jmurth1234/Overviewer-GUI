@@ -37,3 +37,5 @@ Version 1.1
  * adds rendermode options to the simple render mode
  * adds error checking
  * adds a button to upload log file to pastebin
+Version 1
+ * initial release
