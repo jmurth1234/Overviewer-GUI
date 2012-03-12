@@ -166,7 +166,8 @@ namespace OverviewerGUI
             }
             if (rendermodes.Length == 0)
             {
-                Console.WriteLine("You need to specify a rendermode!");
+                Console.WriteLine("You need to specify a rendermode! Automatically rendering normal");
+                rendermodes.Append("normal");
             }
             else
             {
