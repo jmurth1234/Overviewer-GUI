@@ -27,6 +27,13 @@ It doesn't work!
 
 Download link?
 --------------
-[OverviewerGUI.exe][dl] (211 KB) -- 11 March 2012
+[OverviewerGUI-1.1.exe][dl] (211 KB) -- 11 March 2012
 
-[dl]: https://github.com/downloads/rymate1234/Overviewer-GUI/OverviewerGUI.exe
+[dl]: https://github.com/downloads/rymate1234/Overviewer-GUI/OverviewerGUI-1.1.exe
+
+Changelog
+---------
+Version 1.1
+ * adds rendermode options to the simple render mode
+ * adds error checking
+ * adds a button to upload log file to pastebin
