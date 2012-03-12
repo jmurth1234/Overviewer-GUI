@@ -47,6 +47,13 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.buttonLeveBrowse = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.normalCheck = new System.Windows.Forms.CheckBox();
+            this.lightingCheck = new System.Windows.Forms.CheckBox();
+            this.smoothLighingCheck = new System.Windows.Forms.CheckBox();
+            this.caveCheck = new System.Windows.Forms.CheckBox();
+            this.nightCheck = new System.Windows.Forms.CheckBox();
+            this.smoothNightCheck = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -95,17 +102,24 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 13);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(482, 203);
+            this.tabControl1.Size = new System.Drawing.Size(482, 230);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.smoothNightCheck);
+            this.tabPage1.Controls.Add(this.nightCheck);
+            this.tabPage1.Controls.Add(this.caveCheck);
+            this.tabPage1.Controls.Add(this.smoothLighingCheck);
+            this.tabPage1.Controls.Add(this.lightingCheck);
+            this.tabPage1.Controls.Add(this.normalCheck);
+            this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(474, 177);
+            this.tabPage1.Size = new System.Drawing.Size(474, 204);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Simple Mode";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -117,7 +131,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(474, 147);
+            this.tabPage2.Size = new System.Drawing.Size(474, 177);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Advanced Mode";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -154,7 +168,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(6, 129);
+            this.linkLabel1.Location = new System.Drawing.Point(23, 143);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(126, 13);
             this.linkLabel1.TabIndex = 0;
@@ -164,17 +178,17 @@
             // 
             // OVOutput
             // 
-            this.OVOutput.Location = new System.Drawing.Point(12, 222);
+            this.OVOutput.Location = new System.Drawing.Point(12, 249);
             this.OVOutput.Multiline = true;
             this.OVOutput.Name = "OVOutput";
             this.OVOutput.ReadOnly = true;
             this.OVOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.OVOutput.Size = new System.Drawing.Size(362, 242);
+            this.OVOutput.Size = new System.Drawing.Size(362, 215);
             this.OVOutput.TabIndex = 3;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(380, 222);
+            this.button1.Location = new System.Drawing.Point(380, 249);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(110, 35);
             this.button1.TabIndex = 4;
@@ -224,6 +238,79 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "World Folder";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 125);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(74, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "RenderModes";
+            // 
+            // normalCheck
+            // 
+            this.normalCheck.AutoSize = true;
+            this.normalCheck.Checked = true;
+            this.normalCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.normalCheck.Location = new System.Drawing.Point(12, 142);
+            this.normalCheck.Name = "normalCheck";
+            this.normalCheck.Size = new System.Drawing.Size(102, 17);
+            this.normalCheck.TabIndex = 4;
+            this.normalCheck.Text = "Normal (Default)";
+            this.normalCheck.UseVisualStyleBackColor = true;
+            // 
+            // lightingCheck
+            // 
+            this.lightingCheck.AutoSize = true;
+            this.lightingCheck.Location = new System.Drawing.Point(12, 166);
+            this.lightingCheck.Name = "lightingCheck";
+            this.lightingCheck.Size = new System.Drawing.Size(63, 17);
+            this.lightingCheck.TabIndex = 5;
+            this.lightingCheck.Text = "Lighting";
+            this.lightingCheck.UseVisualStyleBackColor = true;
+            // 
+            // smoothLighingCheck
+            // 
+            this.smoothLighingCheck.AutoSize = true;
+            this.smoothLighingCheck.Location = new System.Drawing.Point(120, 142);
+            this.smoothLighingCheck.Name = "smoothLighingCheck";
+            this.smoothLighingCheck.Size = new System.Drawing.Size(102, 17);
+            this.smoothLighingCheck.TabIndex = 6;
+            this.smoothLighingCheck.Text = "Smooth Lighting";
+            this.smoothLighingCheck.UseVisualStyleBackColor = true;
+            // 
+            // caveCheck
+            // 
+            this.caveCheck.AutoSize = true;
+            this.caveCheck.Location = new System.Drawing.Point(120, 166);
+            this.caveCheck.Name = "caveCheck";
+            this.caveCheck.Size = new System.Drawing.Size(51, 17);
+            this.caveCheck.TabIndex = 7;
+            this.caveCheck.Text = "Cave";
+            this.caveCheck.UseVisualStyleBackColor = true;
+            // 
+            // nightCheck
+            // 
+            this.nightCheck.AutoSize = true;
+            this.nightCheck.Location = new System.Drawing.Point(229, 142);
+            this.nightCheck.Name = "nightCheck";
+            this.nightCheck.Size = new System.Drawing.Size(51, 17);
+            this.nightCheck.TabIndex = 8;
+            this.nightCheck.Text = "Night";
+            this.nightCheck.UseVisualStyleBackColor = true;
+            // 
+            // smoothNightCheck
+            // 
+            this.smoothNightCheck.AutoSize = true;
+            this.smoothNightCheck.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.smoothNightCheck.Location = new System.Drawing.Point(229, 166);
+            this.smoothNightCheck.Name = "smoothNightCheck";
+            this.smoothNightCheck.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.smoothNightCheck.Size = new System.Drawing.Size(90, 17);
+            this.smoothNightCheck.TabIndex = 9;
+            this.smoothNightCheck.Text = "Smooth Night";
+            this.smoothNightCheck.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -242,6 +329,7 @@
             this.groupBox2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -273,6 +361,13 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button buttonLeveBrowse;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox caveCheck;
+        private System.Windows.Forms.CheckBox smoothLighingCheck;
+        private System.Windows.Forms.CheckBox lightingCheck;
+        private System.Windows.Forms.CheckBox normalCheck;
+        private System.Windows.Forms.CheckBox smoothNightCheck;
+        private System.Windows.Forms.CheckBox nightCheck;
     }
 }
 

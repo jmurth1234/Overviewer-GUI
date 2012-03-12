@@ -77,7 +77,7 @@ namespace OverviewerGUI
             Process proc = new Process();
 
             proc.StartInfo.FileName = @"cmd";
-            proc.StartInfo.Arguments = "/c overviewer.exe \"" + worldDir + "\" \"" + outDir + "\" ";
+            proc.StartInfo.Arguments = "/c overviewer.exe --rendermodes=" + getRenderModes() + " \"" + worldDir + "\" \"" + outDir + "\" ";
             // set up output redirection
             proc.StartInfo.RedirectStandardOutput = true;
             proc.StartInfo.RedirectStandardError = true;
@@ -134,6 +134,46 @@ namespace OverviewerGUI
         private void ProcessExited(Object sender, EventArgs e)
         {
             Console.WriteLine("The render is complete! Go to " + outDir + " and click index.html to view it! :)");
+        }
+
+        private String getRenderModes()
+        {
+            //WALL OF IF STATEMENTS FTW
+            System.Text.StringBuilder rendermodes = new System.Text.StringBuilder();
+            if (normalCheck.Checked == true)
+            {
+                rendermodes.Append("normal,");
+            }
+            if (lightingCheck.Checked == true)
+            {
+                rendermodes.Append("lighting,");
+            }
+            if (smoothLighingCheck.Checked == true)
+            {
+                rendermodes.Append("smooth-lighting,");
+            }
+            if (caveCheck.Checked == true)
+            {
+                rendermodes.Append("cave,");
+            }
+            if (nightCheck.Checked == true)
+            {
+                rendermodes.Append("night,");
+            }
+            if (smoothNightCheck.Checked == true)
+            {
+                rendermodes.Append("smooth-night");
+            }
+            if (rendermodes.Length == 0)
+            {
+                Console.WriteLine("You need to specify a rendermode!");
+            }
+            else
+            {
+                rendermodes.Remove(rendermodes.Length, 1);
+                Console.WriteLine("Ok, I'll be rendering " + rendermodes.ToString());
+            }
+            return rendermodes.ToString();
         }
 
     }
