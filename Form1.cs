@@ -134,8 +134,16 @@ namespace OverviewerGUI
             Console.WriteLine(e.Data);
         }
         private void ProcessExited(Object sender, EventArgs e)
+            
         {
-            Console.WriteLine("The render is complete! Go to " + outDir + " and click index.html to view it! :)");
+            if (OVOutput.Text.Contains("Error"))
+            {
+                Console.WriteLine("Looks like an error occured! This means the render failed! Better report the error!");
+            }
+            else
+            {
+                Console.WriteLine("The render is complete! Go to " + outDir + " and click index.html to view it! :)");
+            }
         }
 
         private String getRenderModes()
