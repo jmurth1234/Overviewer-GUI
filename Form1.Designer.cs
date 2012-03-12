@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.buttonLeveBrowse = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.buttonDirBrowse = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -47,47 +44,16 @@
             this.button1 = new System.Windows.Forms.Button();
             this.configDialog = new System.Windows.Forms.OpenFileDialog();
             this.LevelDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.groupBox1.SuspendLayout();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.buttonLeveBrowse = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.groupBox1.Controls.Add(this.buttonLeveBrowse);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Location = new System.Drawing.Point(6, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(439, 51);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "World Folder";
-            // 
-            // buttonLeveBrowse
-            // 
-            this.buttonLeveBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLeveBrowse.Location = new System.Drawing.Point(358, 19);
-            this.buttonLeveBrowse.Name = "buttonLeveBrowse";
-            this.buttonLeveBrowse.Size = new System.Drawing.Size(75, 23);
-            this.buttonLeveBrowse.TabIndex = 1;
-            this.buttonLeveBrowse.Text = "Browse";
-            this.buttonLeveBrowse.UseVisualStyleBackColor = true;
-            this.buttonLeveBrowse.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.textBox1.Location = new System.Drawing.Point(6, 19);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(346, 20);
-            this.textBox1.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -129,7 +95,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 13);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(482, 173);
+            this.tabControl1.Size = new System.Drawing.Size(482, 203);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -139,7 +105,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(474, 147);
+            this.tabPage1.Size = new System.Drawing.Size(474, 177);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Simple Mode";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -198,7 +164,7 @@
             // 
             // OVOutput
             // 
-            this.OVOutput.Location = new System.Drawing.Point(12, 196);
+            this.OVOutput.Location = new System.Drawing.Point(12, 222);
             this.OVOutput.Multiline = true;
             this.OVOutput.Name = "OVOutput";
             this.OVOutput.ReadOnly = true;
@@ -208,7 +174,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(380, 196);
+            this.button1.Location = new System.Drawing.Point(380, 222);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(110, 35);
             this.button1.TabIndex = 4;
@@ -224,11 +190,45 @@
             // 
             this.LevelDialog.Description = "Select the folder that the level.dat of your world resides in.";
             // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.textBox1.Location = new System.Drawing.Point(6, 19);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(346, 20);
+            this.textBox1.TabIndex = 0;
+            // 
+            // buttonLeveBrowse
+            // 
+            this.buttonLeveBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonLeveBrowse.Location = new System.Drawing.Point(358, 19);
+            this.buttonLeveBrowse.Name = "buttonLeveBrowse";
+            this.buttonLeveBrowse.Size = new System.Drawing.Size(75, 23);
+            this.buttonLeveBrowse.TabIndex = 1;
+            this.buttonLeveBrowse.Text = "Browse";
+            this.buttonLeveBrowse.UseVisualStyleBackColor = true;
+            this.buttonLeveBrowse.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.groupBox1.Controls.Add(this.buttonLeveBrowse);
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Location = new System.Drawing.Point(6, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(439, 51);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "World Folder";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(506, 450);
+            this.ClientSize = new System.Drawing.Size(502, 476);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.OVOutput);
             this.Controls.Add(this.tabControl1);
@@ -238,8 +238,6 @@
             this.Name = "Form1";
             this.Text = "Overviewer GUI";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -248,6 +246,8 @@
             this.tabPage2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -255,9 +255,6 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button buttonLeveBrowse;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button buttonDirBrowse;
         private System.Windows.Forms.TextBox textBox2;
@@ -273,6 +270,9 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.OpenFileDialog configDialog;
         private System.Windows.Forms.FolderBrowserDialog LevelDialog;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button buttonLeveBrowse;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

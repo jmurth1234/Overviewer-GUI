@@ -110,7 +110,7 @@ namespace OverviewerGUI
             proc.ErrorDataReceived += proc_DataReceived;
             proc.OutputDataReceived += proc_DataReceived;
             proc.Start();
-
+            outDir = "the directory specified in the config";
             proc.BeginErrorReadLine();
             proc.BeginOutputReadLine();
             proc.Exited += new EventHandler(ProcessExited);
