@@ -170,7 +170,7 @@ namespace OverviewerGUI
             }
             else
             {
-                rendermodes.Remove(rendermodes.Length - 1, 1);
+                rendermodes.Remove(rendermodes.Length, 0);
                 Console.WriteLine("Ok, I'll be rendering " + rendermodes.ToString());
             }
             return rendermodes.ToString();
