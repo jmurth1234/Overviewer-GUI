@@ -18,11 +18,19 @@ namespace OverviewerGUI
         private string outDir;
         private string configFile;
         TextWriter _writer = null;
+        private String[] splashes = new String[8];
 
         public Form1()
         {
             InitializeComponent();
-
+            splashes[0] = "Can't track the killers IP!";
+            splashes[1] = "CLOOOOOOOUD";
+            splashes[2] = "Uses the minecraft Overviewer!";
+            splashes[3] = "Coded in C#!";
+            splashes[4] = "Open source!";
+            splashes[5] = "Now with title bar splashes!";
+            splashes[6] = "Splashes are stupid!";
+            splashes[7] = "MIIIIIINECRAFT";
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -31,8 +39,9 @@ namespace OverviewerGUI
             _writer = new ConsoleRedirect(OVOutput);
             // Redirect the out Console stream
             Console.SetOut(_writer);
-
             Console.WriteLine("Now redirecting output to the text box");
+
+            this.Text = "Overviewer GUI - " + getSplash();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -222,5 +231,31 @@ namespace OverviewerGUI
             }
         }
 
+        public String getSplash()
+        {
+            Random random = new Random();
+            int n = random.Next(0, 8);
+            switch (n)
+            {
+                case 0:
+                    return splashes[0];
+                case 1:
+                    return splashes[1];
+                case 2:
+                    return splashes[2];
+                case 3:
+                    return splashes[3];
+                case 4:
+                    return splashes[4];
+                case 5:
+                    return splashes[5];
+                case 6:
+                    return splashes[6];
+                case 7:
+                    return splashes[7];
+                default:
+                    return "missingno";
+            }
+        }
     }
 }
