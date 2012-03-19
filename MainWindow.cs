@@ -194,7 +194,8 @@ namespace OverviewerGUI
             {
                 Console.WriteLine("Ok, I'll be rendering " + string.Join(",", rendermodes.ToArray()));
             }
-            return rendermodes.ToString();
+
+            return string.Join(",", rendermodes.ToArray())
         }
 
         private void button3_Click(object sender, EventArgs e)
