@@ -12,7 +12,7 @@ using System.Net;
 
 namespace OverviewerGUI
 {
-    public partial class Form1 : Form
+    public partial class MainWindow : Form
     {
         private string worldDir;
         private string outDir;
@@ -20,7 +20,7 @@ namespace OverviewerGUI
         TextWriter _writer = null;
         private String[] splashes = new String[8];
 
-        public Form1()
+        public MainWindow()
         {
             InitializeComponent();
             splashes[0] = "Can't track the killers IP!";
@@ -158,40 +158,41 @@ namespace OverviewerGUI
         private String getRenderModes()
         {
             //WALL OF IF STATEMENTS FTW
-            System.Text.StringBuilder rendermodes = new System.Text.StringBuilder();
+            List<string> rendermodes = new List<string>();
             if (normalCheck.Checked == true)
             {
-                rendermodes.Append("normal,");
+                rendermodes.Add("normal");
             }
             if (lightingCheck.Checked == true)
             {
-                rendermodes.Append("lighting,");
+                rendermodes.Add("lighting");
             }
             if (smoothLighingCheck.Checked == true)
             {
-                rendermodes.Append("smooth-lighting,");
+                rendermodes.Add("smooth-lighting");
             }
             if (caveCheck.Checked == true)
             {
-                rendermodes.Append("cave,");
+                rendermodes.Add("cave");
             }
             if (nightCheck.Checked == true)
             {
-                rendermodes.Append("night,");
+                rendermodes.Add("night");
             }
             if (smoothNightCheck.Checked == true)
             {
-                rendermodes.Append("smooth-night");
+                rendermodes.Add("smooth-night");
             }
-            if (rendermodes.Length == 0)
+
+
+            if (rendermodes.Count == 0)
             {
                 Console.WriteLine("You need to specify a rendermode! Automatically rendering normal");
-                rendermodes.Append("normal");
+                rendermodes.Add("normal");
             }
             else
             {
-                rendermodes.Remove(rendermodes.Length, 0);
-                Console.WriteLine("Ok, I'll be rendering " + rendermodes.ToString());
+                Console.WriteLine("Ok, I'll be rendering " + string.Join(",", rendermodes.ToArray()));
             }
             return rendermodes.ToString();
         }
@@ -234,28 +235,8 @@ namespace OverviewerGUI
         public String getSplash()
         {
             Random random = new Random();
-            int n = random.Next(0, 8);
-            switch (n)
-            {
-                case 0:
-                    return splashes[0];
-                case 1:
-                    return splashes[1];
-                case 2:
-                    return splashes[2];
-                case 3:
-                    return splashes[3];
-                case 4:
-                    return splashes[4];
-                case 5:
-                    return splashes[5];
-                case 6:
-                    return splashes[6];
-                case 7:
-                    return splashes[7];
-                default:
-                    return "missingno";
-            }
+            int n = random.Next(0, splashes.Length);
+            return splashes[n];
         }
     }
 }
