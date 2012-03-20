@@ -31,6 +31,8 @@ namespace OverviewerGUI
             splashes[5] = "Now with title bar splashes!";
             splashes[6] = "Splashes are stupid!";
             splashes[7] = "MIIIIIINECRAFT";
+            splashes[8] = "It was trivial!";
+            splashes[9] = "At the weekend!";
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -195,7 +197,7 @@ namespace OverviewerGUI
                 Console.WriteLine("Ok, I'll be rendering " + string.Join(",", rendermodes.ToArray()));
             }
 
-            return string.Join(",", rendermodes.ToArray())
+            return string.Join(",", rendermodes.ToArray());
         }
 
         private void button3_Click(object sender, EventArgs e)
