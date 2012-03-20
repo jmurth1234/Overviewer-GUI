@@ -222,7 +222,7 @@ namespace OverviewerGUI
         private void ProcessExited(Object sender, EventArgs e)
             
         {
-            if ((OVOutput.Text.Contains("Error")) || (OVOutput.Text.Contains("error"))) 
+            if (OVOutput.Text.ToLower().Contains("error"))
             {
                 MessageBox.Show("Looks like an error occured! This means the render failed! Better report the error!");
             }
