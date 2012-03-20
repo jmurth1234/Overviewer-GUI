@@ -229,6 +229,7 @@ namespace OverviewerGUI
                 Console.WriteLine("The render is complete! Go to " + outDir + " and click index.html to view it! :)");
             }
             button1.Enabled = true;
+            renderProgress.Value = 100;
         }
 
         private String getRenderModes()
