@@ -30,7 +30,8 @@ namespace OverviewerGUI
                 "Splashes are stupid!",
                 "MIIIIIINECRAFT",
                 "It was trivial!",
-                "At the weekend!"
+                "At the weekend!",
+                "Some people want it in python!"
             };
 
         public delegate void setProgressBarDelegate();
@@ -221,15 +222,16 @@ namespace OverviewerGUI
         private void ProcessExited(Object sender, EventArgs e)
             
         {
-            if (OVOutput.Text.Contains("Error"))
+            if ((OVOutput.Text.Contains("Error")) || (OVOutput.Text.Contains("error"))) 
             {
-                Console.WriteLine("Looks like an error occured! This means the render failed! Better report the error!");
+                MessageBox.Show("Looks like an error occured! This means the render failed! Better report the error!");
             }
             else
             {
-                Console.WriteLine("The render is complete! Go to " + outDir + " and click index.html to view it! :)");
+                MessageBox.Show("The render is complete! Go to " + outDir + " and click index.html to view it! :)");
             }
             button1.Enabled = true;
+            renderProgress.Value = 100;
         }
 
         private String getRenderModes()
