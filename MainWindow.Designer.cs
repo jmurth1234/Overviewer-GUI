@@ -55,6 +55,7 @@
             this.configDialog = new System.Windows.Forms.OpenFileDialog();
             this.LevelDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.button3 = new System.Windows.Forms.Button();
+            this.renderProgress = new System.Windows.Forms.ProgressBar();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -286,7 +287,7 @@
             // 
             // OVOutput
             // 
-            this.OVOutput.Location = new System.Drawing.Point(12, 249);
+            this.OVOutput.Location = new System.Drawing.Point(12, 273);
             this.OVOutput.Multiline = true;
             this.OVOutput.Name = "OVOutput";
             this.OVOutput.ReadOnly = true;
@@ -296,7 +297,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(380, 249);
+            this.button1.Location = new System.Drawing.Point(380, 273);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(110, 35);
             this.button1.TabIndex = 4;
@@ -314,7 +315,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(380, 426);
+            this.button3.Location = new System.Drawing.Point(380, 450);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(114, 38);
             this.button3.TabIndex = 5;
@@ -322,11 +323,19 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // Form1
+            // renderProgress
+            // 
+            this.renderProgress.Location = new System.Drawing.Point(12, 245);
+            this.renderProgress.Name = "renderProgress";
+            this.renderProgress.Size = new System.Drawing.Size(478, 23);
+            this.renderProgress.TabIndex = 6;
+            // 
+            // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 476);
+            this.ClientSize = new System.Drawing.Size(502, 500);
+            this.Controls.Add(this.renderProgress);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.OVOutput);
@@ -334,7 +343,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "MainWindow";
             this.Text = "Overviewer GUI";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox2.ResumeLayout(false);
@@ -381,6 +390,7 @@
         private System.Windows.Forms.CheckBox smoothNightCheck;
         private System.Windows.Forms.CheckBox nightCheck;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ProgressBar renderProgress;
     }
 }
 
