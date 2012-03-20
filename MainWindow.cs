@@ -20,6 +20,7 @@ namespace OverviewerGUI
         private string outDir;
         private string configFile;
         TextWriter _writer = null;
+        private Process proc = new Process();
         private String[] splashes = {
                 "Can't track the killers IP!",
                 "CLOOOOOOOUD",
@@ -79,6 +80,11 @@ namespace OverviewerGUI
             InitializeComponent();
         }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            proc.Kill();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             // Instantiate the writer
@@ -132,8 +138,6 @@ namespace OverviewerGUI
 
         private void simpleRender(string worldDir, string outDir)
         {
-            Process proc = new Process();
-
             proc.StartInfo.FileName = @"cmd";
             proc.StartInfo.Arguments = "/c overviewer.exe --rendermodes=" + getRenderModes() + " \"" + worldDir + "\" \"" + outDir + "\" ";
             // set up output redirection
@@ -154,8 +158,6 @@ namespace OverviewerGUI
 
         private void configRender(String config)
         {
-            Process proc = new Process();
-
             proc.StartInfo.FileName = @"cmd";
             proc.StartInfo.Arguments = "/c overviewer.exe --config=\"" + config + "\" ";
             // set up output redirection
