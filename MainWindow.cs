@@ -5,10 +5,12 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+
 
 namespace OverviewerGUI
 {
@@ -18,21 +20,62 @@ namespace OverviewerGUI
         private string outDir;
         private string configFile;
         TextWriter _writer = null;
-        private String[] splashes = new String[8];
+        private String[] splashes = {
+                "Can't track the killers IP!",
+                "CLOOOOOOOUD",
+                "Uses the minecraft Overviewer!",
+                "Coded in C#!",
+                "Open source!",
+                "Now with title bar splashes!",
+                "Splashes are stupid!",
+                "MIIIIIINECRAFT",
+                "It was trivial!",
+                "At the weekend!"
+            };
+
+        public delegate void setProgressBarDelegate();
+        public delegate void setProgressBarPercentDelegate(int per);
+
+        public void setProgressBarPercent(int per)
+        {
+            if (renderProgress.InvokeRequired == true)
+            {
+                Invoke(new setProgressBarPercentDelegate(setProgressBarPercent), per);
+            }
+            else
+            {
+                renderProgress.Value = per;
+            }
+        }
+
+
+        public void setProgressBarToContinuous()
+        {
+            if (renderProgress.InvokeRequired == true)
+            {
+                Invoke(new setProgressBarDelegate(setProgressBarToContinuous), null);
+            }
+            else
+            {
+                renderProgress.Style = ProgressBarStyle.Continuous;
+            }
+        }
+
+        public void setProgressBarToMarquee()
+        {
+            if (renderProgress.InvokeRequired == true)
+            {
+                Invoke(new setProgressBarDelegate(setProgressBarToMarquee), null);
+            }
+            else
+            {
+                renderProgress.Style = ProgressBarStyle.Marquee;
+            }
+        }
 
         public MainWindow()
         {
             InitializeComponent();
-            splashes[0] = "Can't track the killers IP!";
-            splashes[1] = "CLOOOOOOOUD";
-            splashes[2] = "Uses the minecraft Overviewer!";
-            splashes[3] = "Coded in C#!";
-            splashes[4] = "Open source!";
-            splashes[5] = "Now with title bar splashes!";
-            splashes[6] = "Splashes are stupid!";
-            splashes[7] = "MIIIIIINECRAFT";
-            splashes[8] = "It was trivial!";
-            splashes[9] = "At the weekend!";
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -83,6 +126,7 @@ namespace OverviewerGUI
             {
                 simpleRender(worldDir, outDir);
             }
+            button1.Enabled = false;
         }
 
         private void simpleRender(string worldDir, string outDir)
@@ -142,6 +186,36 @@ namespace OverviewerGUI
 
         void proc_DataReceived(object sender, DataReceivedEventArgs e)
         {
+            if (e.Data == null)
+            {
+                return;
+            }
+
+            if (e.Data.ToString().Contains("Welcome to Minecraft Overviewer!"))
+            {
+                setProgressBarToMarquee();
+            }
+
+            
+            //This could probably be done so much better, but I'm a noob with regular expressions so...
+            string startPattern = "[0-9]+[-][0-9]+[-][0-9]+ [0-9]+[:][0-9]+[:][0-9]+  Rendered [0-9]+ of [0-9]+.";
+            Regex startExpression = new Regex(startPattern);
+            string perPattern = "% complete";
+            Regex perExpression = new Regex(perPattern);
+
+            if (System.Text.RegularExpressions.Regex.IsMatch(e.Data, perPattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase)) {
+                foreach (String sub in startExpression.Split(e.Data))
+                {
+                    foreach (String per in perExpression.Split(sub)) {
+                        setProgressBarToContinuous();
+                        if (per != null && per != "")
+                        {
+                            setProgressBarPercent(Convert.ToInt16(per.Trim()));
+                        }
+                    }
+                }
+            }
+            //renderProgress.Value = renderProgress.Value + 1;
             Console.WriteLine(e.Data);
         }
         private void ProcessExited(Object sender, EventArgs e)
@@ -155,6 +229,7 @@ namespace OverviewerGUI
             {
                 Console.WriteLine("The render is complete! Go to " + outDir + " and click index.html to view it! :)");
             }
+            button1.Enabled = true;
         }
 
         private String getRenderModes()
