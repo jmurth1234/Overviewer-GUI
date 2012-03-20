@@ -215,7 +215,6 @@ namespace OverviewerGUI
                     }
                 }
             }
-            //renderProgress.Value = renderProgress.Value + 1;
             Console.WriteLine(e.Data);
         }
         private void ProcessExited(Object sender, EventArgs e)
