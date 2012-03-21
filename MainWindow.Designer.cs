@@ -48,7 +48,7 @@
             this.advancedModeTab = new System.Windows.Forms.TabPage();
             this.configGroupBox = new System.Windows.Forms.GroupBox();
             this.configTextBox = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.configButton = new System.Windows.Forms.Button();
             this.advancedModeHelp = new System.Windows.Forms.LinkLabel();
             this.OVOutput = new System.Windows.Forms.TextBox();
             this.startRender = new System.Windows.Forms.Button();
@@ -56,6 +56,8 @@
             this.LevelDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.errorButton = new System.Windows.Forms.Button();
             this.renderProgress = new System.Windows.Forms.ProgressBar();
+            this.statusLabel = new System.Windows.Forms.Label();
+            this.expandCollapseButton = new System.Windows.Forms.Button();
             this.outputGroupBox.SuspendLayout();
             this.tabSimpleAdvanced.SuspendLayout();
             this.simpleModeTab.SuspendLayout();
@@ -70,27 +72,27 @@
             this.outputGroupBox.Controls.Add(this.outputFolder);
             this.outputGroupBox.Location = new System.Drawing.Point(6, 63);
             this.outputGroupBox.Name = "outputGroupBox";
-            this.outputGroupBox.Size = new System.Drawing.Size(439, 56);
+            this.outputGroupBox.Size = new System.Drawing.Size(462, 56);
             this.outputGroupBox.TabIndex = 1;
             this.outputGroupBox.TabStop = false;
             this.outputGroupBox.Text = "Output folder";
             // 
             // buttonDirBrowse
             // 
-            this.buttonDirBrowse.Location = new System.Drawing.Point(358, 19);
+            this.buttonDirBrowse.Location = new System.Drawing.Point(381, 19);
             this.buttonDirBrowse.Name = "buttonDirBrowse";
             this.buttonDirBrowse.Size = new System.Drawing.Size(75, 23);
             this.buttonDirBrowse.TabIndex = 1;
             this.buttonDirBrowse.Text = "Browse";
             this.buttonDirBrowse.UseVisualStyleBackColor = true;
-            this.buttonDirBrowse.Click += new System.EventHandler(this.button2_Click);
+            this.buttonDirBrowse.Click += new System.EventHandler(this.buttonDirBrowse_Click);
             // 
             // outputFolder
             // 
             this.outputFolder.Location = new System.Drawing.Point(6, 19);
             this.outputFolder.Name = "outputFolder";
             this.outputFolder.ReadOnly = true;
-            this.outputFolder.Size = new System.Drawing.Size(346, 20);
+            this.outputFolder.Size = new System.Drawing.Size(369, 20);
             this.outputFolder.TabIndex = 0;
             // 
             // outputDir
@@ -206,7 +208,7 @@
             this.worldGroupBox.Controls.Add(this.worldFolder);
             this.worldGroupBox.Location = new System.Drawing.Point(6, 6);
             this.worldGroupBox.Name = "worldGroupBox";
-            this.worldGroupBox.Size = new System.Drawing.Size(439, 51);
+            this.worldGroupBox.Size = new System.Drawing.Size(462, 51);
             this.worldGroupBox.TabIndex = 0;
             this.worldGroupBox.TabStop = false;
             this.worldGroupBox.Text = "World Folder";
@@ -214,23 +216,23 @@
             // buttonLeveBrowse
             // 
             this.buttonLeveBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLeveBrowse.Location = new System.Drawing.Point(358, 19);
+            this.buttonLeveBrowse.Location = new System.Drawing.Point(381, 19);
             this.buttonLeveBrowse.Name = "buttonLeveBrowse";
             this.buttonLeveBrowse.Size = new System.Drawing.Size(75, 23);
             this.buttonLeveBrowse.TabIndex = 1;
             this.buttonLeveBrowse.Text = "Browse";
             this.buttonLeveBrowse.UseVisualStyleBackColor = true;
-            this.buttonLeveBrowse.Click += new System.EventHandler(this.button1_Click);
+            this.buttonLeveBrowse.Click += new System.EventHandler(this.buttonLevelBrowse_Click);
             // 
             // worldFolder
             // 
             this.worldFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.worldFolder.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.worldFolder.BackColor = System.Drawing.SystemColors.Control;
             this.worldFolder.Location = new System.Drawing.Point(6, 19);
             this.worldFolder.Name = "worldFolder";
             this.worldFolder.ReadOnly = true;
-            this.worldFolder.Size = new System.Drawing.Size(346, 20);
+            this.worldFolder.Size = new System.Drawing.Size(369, 20);
             this.worldFolder.TabIndex = 0;
             // 
             // advancedModeTab
@@ -248,7 +250,7 @@
             // configGroupBox
             // 
             this.configGroupBox.Controls.Add(this.configTextBox);
-            this.configGroupBox.Controls.Add(this.button2);
+            this.configGroupBox.Controls.Add(this.configButton);
             this.configGroupBox.Location = new System.Drawing.Point(15, 13);
             this.configGroupBox.Name = "configGroupBox";
             this.configGroupBox.Size = new System.Drawing.Size(453, 58);
@@ -264,15 +266,15 @@
             this.configTextBox.Size = new System.Drawing.Size(355, 20);
             this.configTextBox.TabIndex = 1;
             // 
-            // button2
+            // configButton
             // 
-            this.button2.Location = new System.Drawing.Point(372, 19);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Browse";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            this.configButton.Location = new System.Drawing.Point(372, 19);
+            this.configButton.Name = "configButton";
+            this.configButton.Size = new System.Drawing.Size(75, 23);
+            this.configButton.TabIndex = 0;
+            this.configButton.Text = "Browse";
+            this.configButton.UseVisualStyleBackColor = true;
+            this.configButton.Click += new System.EventHandler(this.configButton_Click_1);
             // 
             // advancedModeHelp
             // 
@@ -283,27 +285,32 @@
             this.advancedModeHelp.TabIndex = 0;
             this.advancedModeHelp.TabStop = true;
             this.advancedModeHelp.Text = "What\'s advanced mode?";
-            this.advancedModeHelp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.advancedModeHelp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.advancedModeHelp_LinkClicked);
             // 
             // OVOutput
             // 
-            this.OVOutput.Location = new System.Drawing.Point(12, 273);
+            this.OVOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.OVOutput.BackColor = System.Drawing.Color.Black;
+            this.OVOutput.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OVOutput.ForeColor = System.Drawing.Color.White;
+            this.OVOutput.Location = new System.Drawing.Point(12, 292);
             this.OVOutput.Multiline = true;
             this.OVOutput.Name = "OVOutput";
             this.OVOutput.ReadOnly = true;
             this.OVOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.OVOutput.Size = new System.Drawing.Size(362, 215);
+            this.OVOutput.Size = new System.Drawing.Size(482, 0);
             this.OVOutput.TabIndex = 3;
             // 
             // startRender
             // 
-            this.startRender.Location = new System.Drawing.Point(380, 273);
+            this.startRender.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.startRender.Location = new System.Drawing.Point(411, 263);
             this.startRender.Name = "startRender";
-            this.startRender.Size = new System.Drawing.Size(110, 35);
+            this.startRender.Size = new System.Drawing.Size(83, 23);
             this.startRender.TabIndex = 4;
             this.startRender.Text = "Start Render";
             this.startRender.UseVisualStyleBackColor = true;
-            this.startRender.Click += new System.EventHandler(this.button1_Click_1);
+            this.startRender.Click += new System.EventHandler(this.startRender_Click_1);
             // 
             // configDialog
             // 
@@ -315,26 +322,49 @@
             // 
             // errorButton
             // 
-            this.errorButton.Location = new System.Drawing.Point(380, 450);
+            this.errorButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.errorButton.Location = new System.Drawing.Point(12, 292);
             this.errorButton.Name = "errorButton";
-            this.errorButton.Size = new System.Drawing.Size(114, 38);
+            this.errorButton.Size = new System.Drawing.Size(83, 23);
             this.errorButton.TabIndex = 5;
-            this.errorButton.Text = "Got an error? CLICK THIS BUTTON";
+            this.errorButton.Text = "Report Error";
             this.errorButton.UseVisualStyleBackColor = true;
-            this.errorButton.Click += new System.EventHandler(this.button3_Click);
+            this.errorButton.Click += new System.EventHandler(this.reportError_Click);
             // 
             // renderProgress
             // 
-            this.renderProgress.Location = new System.Drawing.Point(12, 245);
+            this.renderProgress.Location = new System.Drawing.Point(12, 263);
             this.renderProgress.Name = "renderProgress";
-            this.renderProgress.Size = new System.Drawing.Size(478, 23);
+            this.renderProgress.Size = new System.Drawing.Size(393, 23);
             this.renderProgress.TabIndex = 6;
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.AutoSize = true;
+            this.statusLabel.Location = new System.Drawing.Point(9, 247);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(84, 13);
+            this.statusLabel.TabIndex = 7;
+            this.statusLabel.Text = "Render Status...";
+            // 
+            // expandCollapseButton
+            // 
+            this.expandCollapseButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.expandCollapseButton.Location = new System.Drawing.Point(411, 292);
+            this.expandCollapseButton.Name = "expandCollapseButton";
+            this.expandCollapseButton.Size = new System.Drawing.Size(83, 23);
+            this.expandCollapseButton.TabIndex = 8;
+            this.expandCollapseButton.Text = "Expand";
+            this.expandCollapseButton.UseVisualStyleBackColor = true;
+            this.expandCollapseButton.Click += new System.EventHandler(this.expandCollapseButton_Click);
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 500);
+            this.ClientSize = new System.Drawing.Size(502, 327);
+            this.Controls.Add(this.expandCollapseButton);
+            this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.renderProgress);
             this.Controls.Add(this.errorButton);
             this.Controls.Add(this.startRender);
@@ -345,7 +375,7 @@
             this.MaximizeBox = false;
             this.Name = "MainWindow";
             this.Text = "Overviewer GUI";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.outputGroupBox.ResumeLayout(false);
             this.outputGroupBox.PerformLayout();
             this.tabSimpleAdvanced.ResumeLayout(false);
@@ -376,7 +406,7 @@
         private System.Windows.Forms.TextBox OVOutput;
         private System.Windows.Forms.GroupBox configGroupBox;
         private System.Windows.Forms.TextBox configTextBox;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button configButton;
         private System.Windows.Forms.OpenFileDialog configDialog;
         private System.Windows.Forms.FolderBrowserDialog LevelDialog;
         private System.Windows.Forms.GroupBox worldGroupBox;
@@ -391,6 +421,8 @@
         private System.Windows.Forms.CheckBox nightCheck;
         private System.Windows.Forms.Button errorButton;
         private System.Windows.Forms.ProgressBar renderProgress;
+        private System.Windows.Forms.Label statusLabel;
+        private System.Windows.Forms.Button expandCollapseButton;
     }
 }
 
