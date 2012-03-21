@@ -20,6 +20,9 @@ namespace OverviewerGUI
         private string outDir;
         private string configFile;
         TextWriter _writer = null;
+        private Process proc = new Process();
+        private Boolean haltedRender = false;
+        private Boolean windowExpanded = false;
         private String[] splashes = {
                 "Can't track the killers IP!",
                 "CLOOOOOOOUD",
@@ -36,6 +39,19 @@ namespace OverviewerGUI
 
         public delegate void setProgressBarDelegate();
         public delegate void setProgressBarPercentDelegate(int per);
+        public delegate void setStatusDelegate(string info);
+
+        public void setStatus(string info)
+        {
+            if (statusLabel.InvokeRequired == true)
+            {
+                Invoke(new setStatusDelegate(setStatus), info);
+            }
+            else
+            {
+                statusLabel.Text = info;
+            }
+        }
 
         public void setProgressBarPercent(int per)
         {
@@ -79,7 +95,12 @@ namespace OverviewerGUI
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        { 
+            proc.Kill();
+        }
+
+        private void MainWindow_Load(object sender, EventArgs e)
         {
             // Instantiate the writer
             _writer = new ConsoleRedirect(OVOutput);
@@ -90,34 +111,34 @@ namespace OverviewerGUI
             this.Text = "Overviewer GUI - " + getSplash();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonLevelBrowse_Click(object sender, EventArgs e)
         {
             // Show the dialog and get result.
             DialogResult result = LevelDialog.ShowDialog();
             if (result == DialogResult.OK) // Test result.
             {
-                textBox1.Text = LevelDialog.SelectedPath;
+                worldFolder.Text = LevelDialog.SelectedPath;
                 worldDir = LevelDialog.SelectedPath;
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonDirBrowse_Click(object sender, EventArgs e)
         {
             // Show the dialog and get result.
             DialogResult result = outputDir.ShowDialog();
             if (result == DialogResult.OK) // Test result.
             {
-                textBox2.Text = outputDir.SelectedPath;
+                outputFolder.Text = outputDir.SelectedPath;
                 outDir = outputDir.SelectedPath;
             }
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void advancedModeHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             MessageBox.Show("In advanced mode, instead of specifying a world dir and an output directory, you specify a configuration file for the Overviewer. If using the config file, you do not need to specify world dir or output dir with the GUI - you can specify them in the config file :). More details on th config file are avaliable at docs.overviewer.org", "What is advanced mode?", MessageBoxButtons.OK);
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void startRender_Click_1(object sender, EventArgs e)
         {
             if (configFile != null)
             {
@@ -127,13 +148,11 @@ namespace OverviewerGUI
             {
                 simpleRender(worldDir, outDir);
             }
-            button1.Enabled = false;
+            startRender.Enabled = false;
         }
 
         private void simpleRender(string worldDir, string outDir)
         {
-            Process proc = new Process();
-
             proc.StartInfo.FileName = @"cmd";
             proc.StartInfo.Arguments = "/c overviewer.exe --rendermodes=" + getRenderModes() + " \"" + worldDir + "\" \"" + outDir + "\" ";
             // set up output redirection
@@ -154,8 +173,6 @@ namespace OverviewerGUI
 
         private void configRender(String config)
         {
-            Process proc = new Process();
-
             proc.StartInfo.FileName = @"cmd";
             proc.StartInfo.Arguments = "/c overviewer.exe --config=\"" + config + "\" ";
             // set up output redirection
@@ -175,12 +192,12 @@ namespace OverviewerGUI
 
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
+        private void configButton_Click_1(object sender, EventArgs e)
         {
             DialogResult result = configDialog.ShowDialog();
             if (result == DialogResult.OK) // Test result.
             {
-                textBox4.Text = configDialog.FileName;
+                configTextBox.Text = configDialog.FileName;
                 configFile = configDialog.FileName;
             }
         }
@@ -192,31 +209,45 @@ namespace OverviewerGUI
                 return;
             }
 
-            if (e.Data.ToString().Contains("Welcome to Minecraft Overviewer!"))
+            if (e.Data.Contains("Welcome to Minecraft Overviewer!"))
             {
                 setProgressBarToMarquee();
             }
 
-            
-            //This could probably be done so much better, but I'm a noob with regular expressions so...
-            string startPattern = "[0-9]+[-][0-9]+[-][0-9]+ [0-9]+[:][0-9]+[:][0-9]+  Rendered [0-9]+ of [0-9]+.";
-            Regex startExpression = new Regex(startPattern);
-            string perPattern = "% complete";
-            Regex perExpression = new Regex(perPattern);
+            if (e.Data.Contains("You won't get percentage progress"))
+            {
+                haltedRender = true;
+                setStatus("Last render was interrupted.  You won't get progress for this render.");
+            }
 
-            if (System.Text.RegularExpressions.Regex.IsMatch(e.Data, perPattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase)) {
-                foreach (String sub in startExpression.Split(e.Data))
+            if (!haltedRender)
+            {
+                //This is a 'Hack' to work with an inconsistency with overviewer
+                string stripTiles = e.Data.Replace(" tiles", "");
+
+
+                //This could probably be done so much better, but I'm a noob with regular expressions so...
+                string startPattern = "[0-9]+[-][0-9]+[-][0-9]+ [0-9]+[:][0-9]+[:][0-9]+  Rendered [0-9]+ of [0-9]+.";
+                Regex startExpression = new Regex(startPattern);
+                string perPattern = "% complete";
+                Regex perExpression = new Regex(perPattern);
+
+                if (System.Text.RegularExpressions.Regex.IsMatch(stripTiles, perPattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase))
                 {
-                    foreach (String per in perExpression.Split(sub)) {
-                        setProgressBarToContinuous();
-                        if (per != null && per != "")
+                    foreach (String sub in startExpression.Split(stripTiles))
+                    {
+                        foreach (String per in perExpression.Split(sub))
                         {
-                            setProgressBarPercent(Convert.ToInt16(per.Trim()));
+                            setProgressBarToContinuous();
+                            if (per != null && per != "")
+                            {
+                                setStatus(per.Trim() + "% complete");
+                                setProgressBarPercent(Convert.ToInt16(per.Trim()));
+                            }
                         }
                     }
                 }
             }
-            //renderProgress.Value = renderProgress.Value + 1;
             Console.WriteLine(e.Data);
         }
         private void ProcessExited(Object sender, EventArgs e)
@@ -224,13 +255,17 @@ namespace OverviewerGUI
         {
             if (OVOutput.Text.ToLower().Contains("error"))
             {
+                setStatus("Render finished with error");
                 MessageBox.Show("Looks like an error occured! This means the render failed! Better report the error!");
             }
             else
             {
+                setStatus("Render complete!");
                 MessageBox.Show("The render is complete! Go to " + outDir + " and click index.html to view it! :)");
             }
-            button1.Enabled = true;
+            
+            startRender.Enabled = true;
+            setProgressBarToContinuous();
             renderProgress.Value = 100;
         }
 
@@ -277,7 +312,7 @@ namespace OverviewerGUI
             return string.Join(",", rendermodes.ToArray());
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void reportError_Click(object sender, EventArgs e)
         {
             System.Collections.Specialized.NameValueCollection Data = new System.Collections.Specialized.NameValueCollection();
             String header = "###########################################" + Environment.NewLine +
@@ -318,5 +353,23 @@ namespace OverviewerGUI
             int n = random.Next(0, splashes.Length);
             return splashes[n];
         }
+
+        private void expandCollapseButton_Click(object sender, EventArgs e)
+        {
+
+            if (windowExpanded)
+            {
+                MainWindow.ActiveForm.Height = 359;
+                expandCollapseButton.Text = "Expand";
+            }
+            else
+            {
+                MainWindow.ActiveForm.Height = 543;
+                expandCollapseButton.Text = "Collapse";
+            }
+
+            windowExpanded = !windowExpanded;
+        }
+
     }
 }
