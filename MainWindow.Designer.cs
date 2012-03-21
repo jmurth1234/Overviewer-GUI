@@ -29,102 +29,104 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.outputGroupBox = new System.Windows.Forms.GroupBox();
             this.buttonDirBrowse = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.outputFolder = new System.Windows.Forms.TextBox();
             this.outputDir = new System.Windows.Forms.FolderBrowserDialog();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabSimpleAdvanced = new System.Windows.Forms.TabControl();
+            this.simpleModeTab = new System.Windows.Forms.TabPage();
             this.smoothNightCheck = new System.Windows.Forms.CheckBox();
             this.nightCheck = new System.Windows.Forms.CheckBox();
             this.caveCheck = new System.Windows.Forms.CheckBox();
             this.smoothLighingCheck = new System.Windows.Forms.CheckBox();
             this.lightingCheck = new System.Windows.Forms.CheckBox();
             this.normalCheck = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.renderModesLabel = new System.Windows.Forms.Label();
+            this.worldGroupBox = new System.Windows.Forms.GroupBox();
             this.buttonLeveBrowse = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.worldFolder = new System.Windows.Forms.TextBox();
+            this.advancedModeTab = new System.Windows.Forms.TabPage();
+            this.configGroupBox = new System.Windows.Forms.GroupBox();
+            this.configTextBox = new System.Windows.Forms.TextBox();
+            this.configButton = new System.Windows.Forms.Button();
+            this.advancedModeHelp = new System.Windows.Forms.LinkLabel();
             this.OVOutput = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.startRender = new System.Windows.Forms.Button();
             this.configDialog = new System.Windows.Forms.OpenFileDialog();
             this.LevelDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.button3 = new System.Windows.Forms.Button();
+            this.errorButton = new System.Windows.Forms.Button();
             this.renderProgress = new System.Windows.Forms.ProgressBar();
-            this.groupBox2.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.statusLabel = new System.Windows.Forms.Label();
+            this.expandCollapseButton = new System.Windows.Forms.Button();
+            this.outputGroupBox.SuspendLayout();
+            this.tabSimpleAdvanced.SuspendLayout();
+            this.simpleModeTab.SuspendLayout();
+            this.worldGroupBox.SuspendLayout();
+            this.advancedModeTab.SuspendLayout();
+            this.configGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox2
+            // outputGroupBox
             // 
-            this.groupBox2.Controls.Add(this.buttonDirBrowse);
-            this.groupBox2.Controls.Add(this.textBox2);
-            this.groupBox2.Location = new System.Drawing.Point(6, 63);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(439, 56);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Output folder";
+            this.outputGroupBox.Controls.Add(this.buttonDirBrowse);
+            this.outputGroupBox.Controls.Add(this.outputFolder);
+            this.outputGroupBox.Location = new System.Drawing.Point(6, 63);
+            this.outputGroupBox.Name = "outputGroupBox";
+            this.outputGroupBox.Size = new System.Drawing.Size(462, 56);
+            this.outputGroupBox.TabIndex = 1;
+            this.outputGroupBox.TabStop = false;
+            this.outputGroupBox.Text = "Output folder";
             // 
             // buttonDirBrowse
             // 
-            this.buttonDirBrowse.Location = new System.Drawing.Point(358, 19);
+            this.buttonDirBrowse.Location = new System.Drawing.Point(381, 19);
             this.buttonDirBrowse.Name = "buttonDirBrowse";
             this.buttonDirBrowse.Size = new System.Drawing.Size(75, 23);
             this.buttonDirBrowse.TabIndex = 1;
             this.buttonDirBrowse.Text = "Browse";
             this.buttonDirBrowse.UseVisualStyleBackColor = true;
-            this.buttonDirBrowse.Click += new System.EventHandler(this.button2_Click);
+            this.buttonDirBrowse.Click += new System.EventHandler(this.buttonDirBrowse_Click);
             // 
-            // textBox2
+            // outputFolder
             // 
-            this.textBox2.Location = new System.Drawing.Point(6, 19);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(346, 20);
-            this.textBox2.TabIndex = 0;
+            this.outputFolder.Location = new System.Drawing.Point(6, 19);
+            this.outputFolder.Name = "outputFolder";
+            this.outputFolder.ReadOnly = true;
+            this.outputFolder.Size = new System.Drawing.Size(369, 20);
+            this.outputFolder.TabIndex = 0;
             // 
             // outputDir
             // 
             this.outputDir.Description = "Select where the Overviewer will save the html files and render to";
             // 
-            // tabControl1
+            // tabSimpleAdvanced
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 13);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(482, 230);
-            this.tabControl1.TabIndex = 2;
+            this.tabSimpleAdvanced.Controls.Add(this.simpleModeTab);
+            this.tabSimpleAdvanced.Controls.Add(this.advancedModeTab);
+            this.tabSimpleAdvanced.Location = new System.Drawing.Point(12, 13);
+            this.tabSimpleAdvanced.Name = "tabSimpleAdvanced";
+            this.tabSimpleAdvanced.SelectedIndex = 0;
+            this.tabSimpleAdvanced.Size = new System.Drawing.Size(482, 230);
+            this.tabSimpleAdvanced.TabIndex = 2;
             // 
-            // tabPage1
+            // simpleModeTab
             // 
-            this.tabPage1.Controls.Add(this.smoothNightCheck);
-            this.tabPage1.Controls.Add(this.nightCheck);
-            this.tabPage1.Controls.Add(this.caveCheck);
-            this.tabPage1.Controls.Add(this.smoothLighingCheck);
-            this.tabPage1.Controls.Add(this.lightingCheck);
-            this.tabPage1.Controls.Add(this.normalCheck);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.groupBox2);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(474, 204);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Simple Mode";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.simpleModeTab.Controls.Add(this.smoothNightCheck);
+            this.simpleModeTab.Controls.Add(this.nightCheck);
+            this.simpleModeTab.Controls.Add(this.caveCheck);
+            this.simpleModeTab.Controls.Add(this.smoothLighingCheck);
+            this.simpleModeTab.Controls.Add(this.lightingCheck);
+            this.simpleModeTab.Controls.Add(this.normalCheck);
+            this.simpleModeTab.Controls.Add(this.renderModesLabel);
+            this.simpleModeTab.Controls.Add(this.worldGroupBox);
+            this.simpleModeTab.Controls.Add(this.outputGroupBox);
+            this.simpleModeTab.Location = new System.Drawing.Point(4, 22);
+            this.simpleModeTab.Name = "simpleModeTab";
+            this.simpleModeTab.Padding = new System.Windows.Forms.Padding(3);
+            this.simpleModeTab.Size = new System.Drawing.Size(474, 204);
+            this.simpleModeTab.TabIndex = 0;
+            this.simpleModeTab.Text = "Simple Mode";
+            this.simpleModeTab.UseVisualStyleBackColor = true;
             // 
             // smoothNightCheck
             // 
@@ -190,120 +192,125 @@
             this.normalCheck.Text = "Normal (Default)";
             this.normalCheck.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // renderModesLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 125);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "RenderModes";
+            this.renderModesLabel.AutoSize = true;
+            this.renderModesLabel.Location = new System.Drawing.Point(9, 125);
+            this.renderModesLabel.Name = "renderModesLabel";
+            this.renderModesLabel.Size = new System.Drawing.Size(77, 13);
+            this.renderModesLabel.TabIndex = 3;
+            this.renderModesLabel.Text = "Render Modes";
             // 
-            // groupBox1
+            // worldGroupBox
             // 
-            this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.groupBox1.Controls.Add(this.buttonLeveBrowse);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Location = new System.Drawing.Point(6, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(439, 51);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "World Folder";
+            this.worldGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.worldGroupBox.Controls.Add(this.buttonLeveBrowse);
+            this.worldGroupBox.Controls.Add(this.worldFolder);
+            this.worldGroupBox.Location = new System.Drawing.Point(6, 6);
+            this.worldGroupBox.Name = "worldGroupBox";
+            this.worldGroupBox.Size = new System.Drawing.Size(462, 51);
+            this.worldGroupBox.TabIndex = 0;
+            this.worldGroupBox.TabStop = false;
+            this.worldGroupBox.Text = "World Folder";
             // 
             // buttonLeveBrowse
             // 
             this.buttonLeveBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLeveBrowse.Location = new System.Drawing.Point(358, 19);
+            this.buttonLeveBrowse.Location = new System.Drawing.Point(381, 19);
             this.buttonLeveBrowse.Name = "buttonLeveBrowse";
             this.buttonLeveBrowse.Size = new System.Drawing.Size(75, 23);
             this.buttonLeveBrowse.TabIndex = 1;
             this.buttonLeveBrowse.Text = "Browse";
             this.buttonLeveBrowse.UseVisualStyleBackColor = true;
-            this.buttonLeveBrowse.Click += new System.EventHandler(this.button1_Click);
+            this.buttonLeveBrowse.Click += new System.EventHandler(this.buttonLevelBrowse_Click);
             // 
-            // textBox1
+            // worldFolder
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.worldFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.textBox1.Location = new System.Drawing.Point(6, 19);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(346, 20);
-            this.textBox1.TabIndex = 0;
+            this.worldFolder.BackColor = System.Drawing.SystemColors.Control;
+            this.worldFolder.Location = new System.Drawing.Point(6, 19);
+            this.worldFolder.Name = "worldFolder";
+            this.worldFolder.ReadOnly = true;
+            this.worldFolder.Size = new System.Drawing.Size(369, 20);
+            this.worldFolder.TabIndex = 0;
             // 
-            // tabPage2
+            // advancedModeTab
             // 
-            this.tabPage2.Controls.Add(this.groupBox3);
-            this.tabPage2.Controls.Add(this.linkLabel1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(474, 204);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Advanced Mode";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.advancedModeTab.Controls.Add(this.configGroupBox);
+            this.advancedModeTab.Controls.Add(this.advancedModeHelp);
+            this.advancedModeTab.Location = new System.Drawing.Point(4, 22);
+            this.advancedModeTab.Name = "advancedModeTab";
+            this.advancedModeTab.Padding = new System.Windows.Forms.Padding(3);
+            this.advancedModeTab.Size = new System.Drawing.Size(474, 204);
+            this.advancedModeTab.TabIndex = 1;
+            this.advancedModeTab.Text = "Advanced Mode";
+            this.advancedModeTab.UseVisualStyleBackColor = true;
             // 
-            // groupBox3
+            // configGroupBox
             // 
-            this.groupBox3.Controls.Add(this.textBox4);
-            this.groupBox3.Controls.Add(this.button2);
-            this.groupBox3.Location = new System.Drawing.Point(15, 13);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(453, 58);
-            this.groupBox3.TabIndex = 1;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Overviewer Config File";
+            this.configGroupBox.Controls.Add(this.configTextBox);
+            this.configGroupBox.Controls.Add(this.configButton);
+            this.configGroupBox.Location = new System.Drawing.Point(15, 13);
+            this.configGroupBox.Name = "configGroupBox";
+            this.configGroupBox.Size = new System.Drawing.Size(453, 58);
+            this.configGroupBox.TabIndex = 1;
+            this.configGroupBox.TabStop = false;
+            this.configGroupBox.Text = "Overviewer Config File";
             // 
-            // textBox4
+            // configTextBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(11, 21);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(355, 20);
-            this.textBox4.TabIndex = 1;
+            this.configTextBox.Location = new System.Drawing.Point(11, 21);
+            this.configTextBox.Name = "configTextBox";
+            this.configTextBox.ReadOnly = true;
+            this.configTextBox.Size = new System.Drawing.Size(355, 20);
+            this.configTextBox.TabIndex = 1;
             // 
-            // button2
+            // configButton
             // 
-            this.button2.Location = new System.Drawing.Point(372, 19);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Browse";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            this.configButton.Location = new System.Drawing.Point(372, 19);
+            this.configButton.Name = "configButton";
+            this.configButton.Size = new System.Drawing.Size(75, 23);
+            this.configButton.TabIndex = 0;
+            this.configButton.Text = "Browse";
+            this.configButton.UseVisualStyleBackColor = true;
+            this.configButton.Click += new System.EventHandler(this.configButton_Click_1);
             // 
-            // linkLabel1
+            // advancedModeHelp
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(23, 143);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(126, 13);
-            this.linkLabel1.TabIndex = 0;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "What\'s advanced mode?";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.advancedModeHelp.AutoSize = true;
+            this.advancedModeHelp.Location = new System.Drawing.Point(23, 143);
+            this.advancedModeHelp.Name = "advancedModeHelp";
+            this.advancedModeHelp.Size = new System.Drawing.Size(126, 13);
+            this.advancedModeHelp.TabIndex = 0;
+            this.advancedModeHelp.TabStop = true;
+            this.advancedModeHelp.Text = "What\'s advanced mode?";
+            this.advancedModeHelp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.advancedModeHelp_LinkClicked);
             // 
             // OVOutput
             // 
-            this.OVOutput.Location = new System.Drawing.Point(12, 273);
+            this.OVOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.OVOutput.BackColor = System.Drawing.Color.Black;
+            this.OVOutput.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OVOutput.ForeColor = System.Drawing.Color.White;
+            this.OVOutput.Location = new System.Drawing.Point(12, 292);
             this.OVOutput.Multiline = true;
             this.OVOutput.Name = "OVOutput";
             this.OVOutput.ReadOnly = true;
             this.OVOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.OVOutput.Size = new System.Drawing.Size(362, 215);
+            this.OVOutput.Size = new System.Drawing.Size(482, 0);
             this.OVOutput.TabIndex = 3;
             // 
-            // button1
+            // startRender
             // 
-            this.button1.Location = new System.Drawing.Point(380, 273);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(110, 35);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Start Render";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.startRender.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.startRender.Location = new System.Drawing.Point(411, 263);
+            this.startRender.Name = "startRender";
+            this.startRender.Size = new System.Drawing.Size(83, 23);
+            this.startRender.TabIndex = 4;
+            this.startRender.Text = "Start Render";
+            this.startRender.UseVisualStyleBackColor = true;
+            this.startRender.Click += new System.EventHandler(this.startRender_Click_1);
             // 
             // configDialog
             // 
@@ -313,50 +320,73 @@
             // 
             this.LevelDialog.Description = "Select the folder that the level.dat of your world resides in.";
             // 
-            // button3
+            // errorButton
             // 
-            this.button3.Location = new System.Drawing.Point(380, 450);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(114, 38);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "Got an error? CLICK THIS BUTTON";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.errorButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.errorButton.Location = new System.Drawing.Point(12, 292);
+            this.errorButton.Name = "errorButton";
+            this.errorButton.Size = new System.Drawing.Size(83, 23);
+            this.errorButton.TabIndex = 5;
+            this.errorButton.Text = "Report Error";
+            this.errorButton.UseVisualStyleBackColor = true;
+            this.errorButton.Click += new System.EventHandler(this.reportError_Click);
             // 
             // renderProgress
             // 
-            this.renderProgress.Location = new System.Drawing.Point(12, 245);
+            this.renderProgress.Location = new System.Drawing.Point(12, 263);
             this.renderProgress.Name = "renderProgress";
-            this.renderProgress.Size = new System.Drawing.Size(478, 23);
+            this.renderProgress.Size = new System.Drawing.Size(393, 23);
             this.renderProgress.TabIndex = 6;
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.AutoSize = true;
+            this.statusLabel.Location = new System.Drawing.Point(9, 247);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(84, 13);
+            this.statusLabel.TabIndex = 7;
+            this.statusLabel.Text = "Render Status...";
+            // 
+            // expandCollapseButton
+            // 
+            this.expandCollapseButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.expandCollapseButton.Location = new System.Drawing.Point(411, 292);
+            this.expandCollapseButton.Name = "expandCollapseButton";
+            this.expandCollapseButton.Size = new System.Drawing.Size(83, 23);
+            this.expandCollapseButton.TabIndex = 8;
+            this.expandCollapseButton.Text = "Expand";
+            this.expandCollapseButton.UseVisualStyleBackColor = true;
+            this.expandCollapseButton.Click += new System.EventHandler(this.expandCollapseButton_Click);
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 500);
+            this.ClientSize = new System.Drawing.Size(502, 327);
+            this.Controls.Add(this.expandCollapseButton);
+            this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.renderProgress);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.errorButton);
+            this.Controls.Add(this.startRender);
             this.Controls.Add(this.OVOutput);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabSimpleAdvanced);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainWindow";
             this.Text = "Overviewer GUI";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.Load += new System.EventHandler(this.MainWindow_Load);
+            this.outputGroupBox.ResumeLayout(false);
+            this.outputGroupBox.PerformLayout();
+            this.tabSimpleAdvanced.ResumeLayout(false);
+            this.simpleModeTab.ResumeLayout(false);
+            this.simpleModeTab.PerformLayout();
+            this.worldGroupBox.ResumeLayout(false);
+            this.worldGroupBox.PerformLayout();
+            this.advancedModeTab.ResumeLayout(false);
+            this.advancedModeTab.PerformLayout();
+            this.configGroupBox.ResumeLayout(false);
+            this.configGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -364,33 +394,35 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox outputGroupBox;
         private System.Windows.Forms.Button buttonDirBrowse;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox outputFolder;
         private System.Windows.Forms.FolderBrowserDialog outputDir;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TabControl tabSimpleAdvanced;
+        private System.Windows.Forms.TabPage simpleModeTab;
+        private System.Windows.Forms.TabPage advancedModeTab;
+        private System.Windows.Forms.LinkLabel advancedModeHelp;
+        private System.Windows.Forms.Button startRender;
         private System.Windows.Forms.TextBox OVOutput;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.GroupBox configGroupBox;
+        private System.Windows.Forms.TextBox configTextBox;
+        private System.Windows.Forms.Button configButton;
         private System.Windows.Forms.OpenFileDialog configDialog;
         private System.Windows.Forms.FolderBrowserDialog LevelDialog;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox worldGroupBox;
         private System.Windows.Forms.Button buttonLeveBrowse;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox worldFolder;
+        private System.Windows.Forms.Label renderModesLabel;
         private System.Windows.Forms.CheckBox caveCheck;
         private System.Windows.Forms.CheckBox smoothLighingCheck;
         private System.Windows.Forms.CheckBox lightingCheck;
         private System.Windows.Forms.CheckBox normalCheck;
         private System.Windows.Forms.CheckBox smoothNightCheck;
         private System.Windows.Forms.CheckBox nightCheck;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button errorButton;
         private System.Windows.Forms.ProgressBar renderProgress;
+        private System.Windows.Forms.Label statusLabel;
+        private System.Windows.Forms.Button expandCollapseButton;
     }
 }
 
