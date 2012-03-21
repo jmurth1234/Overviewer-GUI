@@ -81,7 +81,7 @@ namespace OverviewerGUI
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
+        { 
             proc.Kill();
         }
 
@@ -102,7 +102,7 @@ namespace OverviewerGUI
             DialogResult result = LevelDialog.ShowDialog();
             if (result == DialogResult.OK) // Test result.
             {
-                textBox1.Text = LevelDialog.SelectedPath;
+                worldFolder.Text = LevelDialog.SelectedPath;
                 worldDir = LevelDialog.SelectedPath;
             }
         }
@@ -113,7 +113,7 @@ namespace OverviewerGUI
             DialogResult result = outputDir.ShowDialog();
             if (result == DialogResult.OK) // Test result.
             {
-                textBox2.Text = outputDir.SelectedPath;
+                outputFolder.Text = outputDir.SelectedPath;
                 outDir = outputDir.SelectedPath;
             }
         }
@@ -133,7 +133,7 @@ namespace OverviewerGUI
             {
                 simpleRender(worldDir, outDir);
             }
-            button1.Enabled = false;
+            startRender.Enabled = false;
         }
 
         private void simpleRender(string worldDir, string outDir)
@@ -182,7 +182,7 @@ namespace OverviewerGUI
             DialogResult result = configDialog.ShowDialog();
             if (result == DialogResult.OK) // Test result.
             {
-                textBox4.Text = configDialog.FileName;
+                configTextBox.Text = configDialog.FileName;
                 configFile = configDialog.FileName;
             }
         }
@@ -231,7 +231,7 @@ namespace OverviewerGUI
             {
                 MessageBox.Show("The render is complete! Go to " + outDir + " and click index.html to view it! :)");
             }
-            button1.Enabled = true;
+            startRender.Enabled = true;
             renderProgress.Value = 100;
         }
 
