@@ -232,6 +232,7 @@ namespace OverviewerGUI
                 MessageBox.Show("The render is complete! Go to " + outDir + " and click index.html to view it! :)");
             }
             startRender.Enabled = true;
+            setProgressBarToContinuous();
             renderProgress.Value = 100;
         }
 
