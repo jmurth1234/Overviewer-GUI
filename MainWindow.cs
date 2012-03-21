@@ -153,6 +153,7 @@ namespace OverviewerGUI
 
         private void simpleRender(string worldDir, string outDir)
         {
+            proc = new Process();
             proc.StartInfo.FileName = @"cmd";
             proc.StartInfo.Arguments = "/c overviewer.exe --rendermodes=" + getRenderModes() + " \"" + worldDir + "\" \"" + outDir + "\" ";
             // set up output redirection
@@ -173,6 +174,7 @@ namespace OverviewerGUI
 
         private void configRender(String config)
         {
+            proc = new Process();
             proc.StartInfo.FileName = @"cmd";
             proc.StartInfo.Arguments = "/c overviewer.exe --config=\"" + config + "\" ";
             // set up output redirection
@@ -250,9 +252,13 @@ namespace OverviewerGUI
             }
             Console.WriteLine(e.Data);
         }
-        private void ProcessExited(Object sender, EventArgs e)
-            
+        private void ProcessExited(Object sender, EventArgs e)   
         {
+
+            startRender.Enabled = true;
+            setProgressBarToContinuous();
+            renderProgress.Value = 100;
+
             if (OVOutput.Text.ToLower().Contains("error"))
             {
                 setStatus("Render finished with error");
@@ -264,9 +270,7 @@ namespace OverviewerGUI
                 MessageBox.Show("The render is complete! Go to " + outDir + " and click index.html to view it! :)");
             }
             
-            startRender.Enabled = true;
-            setProgressBarToContinuous();
-            renderProgress.Value = 100;
+            
         }
 
         private String getRenderModes()
