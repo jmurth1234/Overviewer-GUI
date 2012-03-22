@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using Ini;
 
 
 namespace OverviewerGUI
@@ -23,6 +24,7 @@ namespace OverviewerGUI
         private Process proc = new Process();
         private Boolean haltedRender = false;
         private Boolean windowExpanded = false;
+        private IniFile configuration = new IniFile(".\\OverviewerGUI.ini");
         private String[] splashes = {
                 "Can't track the killers IP!",
                 "CLOOOOOOOUD",
@@ -107,8 +109,23 @@ namespace OverviewerGUI
             // Redirect the out Console stream
             Console.SetOut(_writer);
             Console.WriteLine("Now redirecting output to the text box");
-
             this.Text = "Overviewer GUI - " + getSplash();
+
+            //Configuration initialization
+            var configWorldPath = configuration.IniReadValue("Paths", "worldDir");
+            var configOutPath = configuration.IniReadValue("Paths", "outDir");
+            if (configWorldPath != "" && configWorldPath != null) {
+                worldFolder.Text = configWorldPath;
+                worldDir = configWorldPath;
+            }
+
+            if (configOutPath != "" && configOutPath != null)
+            {
+                outputFolder.Text = configOutPath;
+                outDir = configOutPath;
+            }
+
+
         }
 
         private void buttonLevelBrowse_Click(object sender, EventArgs e)
@@ -119,6 +136,7 @@ namespace OverviewerGUI
             {
                 worldFolder.Text = LevelDialog.SelectedPath;
                 worldDir = LevelDialog.SelectedPath;
+                configuration.IniWriteValue("Paths", "worldDir", LevelDialog.SelectedPath);
             }
         }
 
@@ -130,6 +148,7 @@ namespace OverviewerGUI
             {
                 outputFolder.Text = outputDir.SelectedPath;
                 outDir = outputDir.SelectedPath;
+                configuration.IniWriteValue("Paths", "outDir", outputDir.SelectedPath);
             }
         }
 
