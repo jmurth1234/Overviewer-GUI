@@ -8,6 +8,7 @@ namespace Ini
     /// <summary>
     /// Create a New INI file to store or load data
     /// </summary>
+    /// Created by BLaZiNiX at http://www.codeproject.com/Articles/1966/An-INI-file-handling-class-using-C
     public class IniFile
     {
         public string path;
