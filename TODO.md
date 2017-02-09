@@ -8,7 +8,7 @@ High Importance (my opinion)
 -  Make it less like a console app wrapper
 -  DIALOGS (actually quite easy)
 -  Custom Error box for the error detection
--  Scheduled renders (no idea how to do this, but I want to do it)
+-  Scheduled renders (no idea how to do this, but I want to do it) (could be done with windows 10 background tasks)
 
 Low Importance
 --------------

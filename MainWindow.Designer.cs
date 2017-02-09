@@ -35,6 +35,8 @@
             this.outputDir = new System.Windows.Forms.FolderBrowserDialog();
             this.tabSimpleAdvanced = new System.Windows.Forms.TabControl();
             this.simpleModeTab = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.worldNameBox = new System.Windows.Forms.TextBox();
             this.smoothNightCheck = new System.Windows.Forms.CheckBox();
             this.nightCheck = new System.Windows.Forms.CheckBox();
             this.caveCheck = new System.Windows.Forms.CheckBox();
@@ -61,6 +63,7 @@
             this.outputGroupBox.SuspendLayout();
             this.tabSimpleAdvanced.SuspendLayout();
             this.simpleModeTab.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.worldGroupBox.SuspendLayout();
             this.advancedModeTab.SuspendLayout();
             this.configGroupBox.SuspendLayout();
@@ -70,7 +73,7 @@
             // 
             this.outputGroupBox.Controls.Add(this.buttonDirBrowse);
             this.outputGroupBox.Controls.Add(this.outputFolder);
-            this.outputGroupBox.Location = new System.Drawing.Point(6, 63);
+            this.outputGroupBox.Location = new System.Drawing.Point(6, 125);
             this.outputGroupBox.Name = "outputGroupBox";
             this.outputGroupBox.Size = new System.Drawing.Size(462, 56);
             this.outputGroupBox.TabIndex = 1;
@@ -106,11 +109,12 @@
             this.tabSimpleAdvanced.Location = new System.Drawing.Point(12, 13);
             this.tabSimpleAdvanced.Name = "tabSimpleAdvanced";
             this.tabSimpleAdvanced.SelectedIndex = 0;
-            this.tabSimpleAdvanced.Size = new System.Drawing.Size(482, 230);
+            this.tabSimpleAdvanced.Size = new System.Drawing.Size(482, 281);
             this.tabSimpleAdvanced.TabIndex = 2;
             // 
             // simpleModeTab
             // 
+            this.simpleModeTab.Controls.Add(this.groupBox3);
             this.simpleModeTab.Controls.Add(this.smoothNightCheck);
             this.simpleModeTab.Controls.Add(this.nightCheck);
             this.simpleModeTab.Controls.Add(this.caveCheck);
@@ -123,16 +127,38 @@
             this.simpleModeTab.Location = new System.Drawing.Point(4, 22);
             this.simpleModeTab.Name = "simpleModeTab";
             this.simpleModeTab.Padding = new System.Windows.Forms.Padding(3);
-            this.simpleModeTab.Size = new System.Drawing.Size(474, 204);
+            this.simpleModeTab.Size = new System.Drawing.Size(474, 255);
             this.simpleModeTab.TabIndex = 0;
             this.simpleModeTab.Text = "Simple Mode";
             this.simpleModeTab.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.groupBox3.Controls.Add(this.worldNameBox);
+            this.groupBox3.Location = new System.Drawing.Point(6, 11);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(462, 51);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "World Name";
+            // 
+            // worldNameBox
+            // 
+            this.worldNameBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.worldNameBox.BackColor = System.Drawing.SystemColors.Control;
+            this.worldNameBox.Location = new System.Drawing.Point(6, 19);
+            this.worldNameBox.Name = "worldNameBox";
+            this.worldNameBox.Size = new System.Drawing.Size(450, 20);
+            this.worldNameBox.TabIndex = 0;
+            this.worldNameBox.TextChanged += new System.EventHandler(this.worldNameBox_TextChanged);
             // 
             // smoothNightCheck
             // 
             this.smoothNightCheck.AutoSize = true;
             this.smoothNightCheck.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.smoothNightCheck.Location = new System.Drawing.Point(229, 166);
+            this.smoothNightCheck.Location = new System.Drawing.Point(226, 228);
             this.smoothNightCheck.Name = "smoothNightCheck";
             this.smoothNightCheck.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.smoothNightCheck.Size = new System.Drawing.Size(90, 17);
@@ -143,7 +169,7 @@
             // nightCheck
             // 
             this.nightCheck.AutoSize = true;
-            this.nightCheck.Location = new System.Drawing.Point(229, 142);
+            this.nightCheck.Location = new System.Drawing.Point(226, 204);
             this.nightCheck.Name = "nightCheck";
             this.nightCheck.Size = new System.Drawing.Size(51, 17);
             this.nightCheck.TabIndex = 8;
@@ -153,7 +179,7 @@
             // caveCheck
             // 
             this.caveCheck.AutoSize = true;
-            this.caveCheck.Location = new System.Drawing.Point(120, 166);
+            this.caveCheck.Location = new System.Drawing.Point(117, 228);
             this.caveCheck.Name = "caveCheck";
             this.caveCheck.Size = new System.Drawing.Size(51, 17);
             this.caveCheck.TabIndex = 7;
@@ -163,7 +189,7 @@
             // smoothLighingCheck
             // 
             this.smoothLighingCheck.AutoSize = true;
-            this.smoothLighingCheck.Location = new System.Drawing.Point(120, 142);
+            this.smoothLighingCheck.Location = new System.Drawing.Point(117, 204);
             this.smoothLighingCheck.Name = "smoothLighingCheck";
             this.smoothLighingCheck.Size = new System.Drawing.Size(102, 17);
             this.smoothLighingCheck.TabIndex = 6;
@@ -173,7 +199,7 @@
             // lightingCheck
             // 
             this.lightingCheck.AutoSize = true;
-            this.lightingCheck.Location = new System.Drawing.Point(12, 166);
+            this.lightingCheck.Location = new System.Drawing.Point(9, 228);
             this.lightingCheck.Name = "lightingCheck";
             this.lightingCheck.Size = new System.Drawing.Size(63, 17);
             this.lightingCheck.TabIndex = 5;
@@ -185,7 +211,7 @@
             this.normalCheck.AutoSize = true;
             this.normalCheck.Checked = true;
             this.normalCheck.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.normalCheck.Location = new System.Drawing.Point(12, 142);
+            this.normalCheck.Location = new System.Drawing.Point(9, 204);
             this.normalCheck.Name = "normalCheck";
             this.normalCheck.Size = new System.Drawing.Size(102, 17);
             this.normalCheck.TabIndex = 4;
@@ -195,7 +221,7 @@
             // renderModesLabel
             // 
             this.renderModesLabel.AutoSize = true;
-            this.renderModesLabel.Location = new System.Drawing.Point(9, 125);
+            this.renderModesLabel.Location = new System.Drawing.Point(6, 187);
             this.renderModesLabel.Name = "renderModesLabel";
             this.renderModesLabel.Size = new System.Drawing.Size(77, 13);
             this.renderModesLabel.TabIndex = 3;
@@ -206,7 +232,7 @@
             this.worldGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.worldGroupBox.Controls.Add(this.buttonLeveBrowse);
             this.worldGroupBox.Controls.Add(this.worldFolder);
-            this.worldGroupBox.Location = new System.Drawing.Point(6, 6);
+            this.worldGroupBox.Location = new System.Drawing.Point(6, 68);
             this.worldGroupBox.Name = "worldGroupBox";
             this.worldGroupBox.Size = new System.Drawing.Size(462, 51);
             this.worldGroupBox.TabIndex = 0;
@@ -226,8 +252,8 @@
             // 
             // worldFolder
             // 
-            this.worldFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.worldFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.worldFolder.BackColor = System.Drawing.SystemColors.Control;
             this.worldFolder.Location = new System.Drawing.Point(6, 19);
             this.worldFolder.Name = "worldFolder";
@@ -242,7 +268,7 @@
             this.advancedModeTab.Location = new System.Drawing.Point(4, 22);
             this.advancedModeTab.Name = "advancedModeTab";
             this.advancedModeTab.Padding = new System.Windows.Forms.Padding(3);
-            this.advancedModeTab.Size = new System.Drawing.Size(474, 204);
+            this.advancedModeTab.Size = new System.Drawing.Size(474, 255);
             this.advancedModeTab.TabIndex = 1;
             this.advancedModeTab.Text = "Advanced Mode";
             this.advancedModeTab.UseVisualStyleBackColor = true;
@@ -293,7 +319,7 @@
             this.OVOutput.BackColor = System.Drawing.Color.Black;
             this.OVOutput.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OVOutput.ForeColor = System.Drawing.Color.White;
-            this.OVOutput.Location = new System.Drawing.Point(12, 292);
+            this.OVOutput.Location = new System.Drawing.Point(12, 338);
             this.OVOutput.Multiline = true;
             this.OVOutput.Name = "OVOutput";
             this.OVOutput.ReadOnly = true;
@@ -304,9 +330,9 @@
             // startRender
             // 
             this.startRender.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.startRender.Location = new System.Drawing.Point(411, 263);
+            this.startRender.Location = new System.Drawing.Point(417, 313);
             this.startRender.Name = "startRender";
-            this.startRender.Size = new System.Drawing.Size(83, 23);
+            this.startRender.Size = new System.Drawing.Size(77, 23);
             this.startRender.TabIndex = 4;
             this.startRender.Text = "Start Render";
             this.startRender.UseVisualStyleBackColor = true;
@@ -323,7 +349,7 @@
             // errorButton
             // 
             this.errorButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.errorButton.Location = new System.Drawing.Point(12, 292);
+            this.errorButton.Location = new System.Drawing.Point(12, 342);
             this.errorButton.Name = "errorButton";
             this.errorButton.Size = new System.Drawing.Size(83, 23);
             this.errorButton.TabIndex = 5;
@@ -333,7 +359,7 @@
             // 
             // renderProgress
             // 
-            this.renderProgress.Location = new System.Drawing.Point(12, 263);
+            this.renderProgress.Location = new System.Drawing.Point(12, 313);
             this.renderProgress.Name = "renderProgress";
             this.renderProgress.Size = new System.Drawing.Size(393, 23);
             this.renderProgress.TabIndex = 6;
@@ -341,7 +367,7 @@
             // statusLabel
             // 
             this.statusLabel.AutoSize = true;
-            this.statusLabel.Location = new System.Drawing.Point(9, 247);
+            this.statusLabel.Location = new System.Drawing.Point(9, 297);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(84, 13);
             this.statusLabel.TabIndex = 7;
@@ -350,7 +376,7 @@
             // expandCollapseButton
             // 
             this.expandCollapseButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.expandCollapseButton.Location = new System.Drawing.Point(411, 292);
+            this.expandCollapseButton.Location = new System.Drawing.Point(411, 342);
             this.expandCollapseButton.Name = "expandCollapseButton";
             this.expandCollapseButton.Size = new System.Drawing.Size(83, 23);
             this.expandCollapseButton.TabIndex = 8;
@@ -362,7 +388,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 327);
+            this.ClientSize = new System.Drawing.Size(501, 377);
             this.Controls.Add(this.expandCollapseButton);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.renderProgress);
@@ -375,12 +401,14 @@
             this.MaximizeBox = false;
             this.Name = "MainWindow";
             this.Text = "Overviewer GUI";
-            this.Load += new System.EventHandler(this.MainWindow_Load);
+            this.Load += new System.EventHandler(this.MainWindow_LoadAsync);
             this.outputGroupBox.ResumeLayout(false);
             this.outputGroupBox.PerformLayout();
             this.tabSimpleAdvanced.ResumeLayout(false);
             this.simpleModeTab.ResumeLayout(false);
             this.simpleModeTab.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.worldGroupBox.ResumeLayout(false);
             this.worldGroupBox.PerformLayout();
             this.advancedModeTab.ResumeLayout(false);
@@ -423,6 +451,8 @@
         private System.Windows.Forms.ProgressBar renderProgress;
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.Button expandCollapseButton;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox worldNameBox;
     }
 }
 

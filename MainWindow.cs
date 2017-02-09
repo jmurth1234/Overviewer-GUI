@@ -11,13 +11,16 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using Ini;
-
+using Newtonsoft.Json.Linq;
+using System.Security.Policy;
+using System.IO.Compression;
 
 namespace OverviewerGUI
 {
     public partial class MainWindow : Form
     {
         private string worldDir;
+        private string worldName;
         private string outDir;
         private string configFile;
         TextWriter _writer = null;
@@ -39,7 +42,12 @@ namespace OverviewerGUI
                 "Some people want it in python!"
             };
 
+        private string url;
+        private string version;
+        private string ovExe;
+
         public delegate void setProgressBarDelegate();
+        public delegate void setRenderEnabledDelegate(bool enabled);
         public delegate void setProgressBarPercentDelegate(int per);
         public delegate void setStatusDelegate(string info);
 
@@ -52,6 +60,18 @@ namespace OverviewerGUI
             else
             {
                 statusLabel.Text = info;
+            }
+        }
+
+        public void setRenderEnabled(bool enabled)
+        {
+            if (statusLabel.InvokeRequired == true)
+            {
+                Invoke(new setRenderEnabledDelegate(setRenderEnabled), enabled);
+            }
+            else
+            {
+                startRender.Enabled = enabled;
             }
         }
 
@@ -102,7 +122,7 @@ namespace OverviewerGUI
             proc.Kill();
         }
 
-        private void MainWindow_Load(object sender, EventArgs e)
+        private void MainWindow_LoadAsync(object sender, EventArgs e)
         {
             // Instantiate the writer
             _writer = new ConsoleRedirect(OVOutput);
@@ -111,10 +131,49 @@ namespace OverviewerGUI
             Console.WriteLine("Now redirecting output to the text box");
             this.Text = "Overviewer GUI - " + getSplash();
 
+            try
+            {
+                //Download the latest overviewer
+                using (WebClient wc = new WebClient())
+                {
+                    var json = wc.DownloadString("http://overviewer.org/downloads.json");
+
+                    JObject downloads = JObject.Parse(json);
+
+                    url = (string)downloads["win64"]["url"];
+                    version = (string)downloads["win64"]["version"];
+                    ovExe = "overviewer" + version + "\\overviewer.exe";
+
+                    if (!Directory.Exists("overviewer" + version)) { 
+                        var filename = "overviewer" + version + ".zip";
+
+                        wc.DownloadFileAsync(new Uri(url), filename);
+
+                        wc.DownloadProgressChanged += Wc_DownloadProgressChanged;
+                        wc.DownloadFileCompleted += (s, a1) =>
+                        {
+                            ZipFile.ExtractToDirectory(filename, "overviewer" + version);
+
+                            setProgressBarPercent(0);
+                            setStatus("Download finished, ready to render...");
+                        };
+                    }
+                }
+            } catch { }
+
             //Configuration initialization
+            var configWorldName = configuration.IniReadValue("Name", "worldName");
             var configWorldPath = configuration.IniReadValue("Paths", "worldDir");
             var configOutPath = configuration.IniReadValue("Paths", "outDir");
-            if (configWorldPath != "" && configWorldPath != null) {
+
+            if (configWorldName != "" && configWorldName != null)
+            {
+                worldName = configWorldName;
+                worldNameBox.Text = configWorldName;
+            }
+
+            if (configWorldPath != "" && configWorldPath != null)
+            {
                 worldFolder.Text = configWorldPath;
                 worldDir = configWorldPath;
             }
@@ -124,8 +183,12 @@ namespace OverviewerGUI
                 outputFolder.Text = configOutPath;
                 outDir = configOutPath;
             }
+        }
 
-
+        private void Wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            setStatus("Download " + e.ProgressPercentage + "% complete");
+            setProgressBarPercent(e.ProgressPercentage);
         }
 
         private void buttonLevelBrowse_Click(object sender, EventArgs e)
@@ -154,7 +217,12 @@ namespace OverviewerGUI
 
         private void advancedModeHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            MessageBox.Show("In advanced mode, instead of specifying a world dir and an output directory, you specify a configuration file for the Overviewer. If using the config file, you do not need to specify world dir or output dir with the GUI - you can specify them in the config file :). More details on th config file are avaliable at docs.overviewer.org", "What is advanced mode?", MessageBoxButtons.OK);
+            MessageBox.Show("In advanced mode, instead of specifying a world dir and an output directory, " +
+                            "you specify a configuration file for the Overviewer. If using the config file, " +
+                            "you do not need to specify world dir or output dir with the GUI - you can specify " +
+                            "them in the config file :). More details on the config file are avaliable at " +
+                            "docs.overviewer.org",
+                            "What is advanced mode?", MessageBoxButtons.OK);
         }
 
         private void startRender_Click_1(object sender, EventArgs e)
@@ -172,30 +240,24 @@ namespace OverviewerGUI
 
         private void simpleRender(string worldDir, string outDir)
         {
-            proc = new Process();
-            proc.StartInfo.FileName = @"cmd";
-            proc.StartInfo.Arguments = "/c overviewer.exe --rendermodes=" + getRenderModes() + " \"" + worldDir + "\" \"" + outDir + "\" ";
-            // set up output redirection
-            proc.StartInfo.RedirectStandardOutput = true;
-            proc.StartInfo.RedirectStandardError = true;
-            proc.EnableRaisingEvents = true;
-            proc.StartInfo.CreateNoWindow = true;
-            proc.StartInfo.UseShellExecute = false;
-            // see below for output handler
-            proc.ErrorDataReceived += proc_DataReceived;
-            proc.OutputDataReceived += proc_DataReceived;
-            proc.Start();
-            proc.BeginErrorReadLine();
-            proc.BeginOutputReadLine();
-            proc.Exited += new EventHandler(ProcessExited);
+            OverviewerConfigGenerator config = new OverviewerConfigGenerator()
+            {
+                WorldName = worldName,
+                WorldPath = worldDir, 
+                RenderModes = getRenderModes(), 
+                OutputDir = outDir
+            };
 
+            File.WriteAllText("config.generated.py", config.generateConfig());
+
+            configRender("config.generated.py");
         }
 
         private void configRender(String config)
         {
             proc = new Process();
             proc.StartInfo.FileName = @"cmd";
-            proc.StartInfo.Arguments = "/c overviewer.exe --config=\"" + config + "\" ";
+            proc.StartInfo.Arguments = "/c "+ ovExe +" --config=\"" + config + "\" ";
             // set up output redirection
             proc.StartInfo.RedirectStandardOutput = true;
             proc.StartInfo.RedirectStandardError = true;
@@ -206,7 +268,9 @@ namespace OverviewerGUI
             proc.ErrorDataReceived += proc_DataReceived;
             proc.OutputDataReceived += proc_DataReceived;
             proc.Start();
-            outDir = "the directory specified in the config";
+
+            if (configFile != null) outDir = "the directory specified in the config";
+
             proc.BeginErrorReadLine();
             proc.BeginOutputReadLine();
             proc.Exited += new EventHandler(ProcessExited);
@@ -235,48 +299,34 @@ namespace OverviewerGUI
                 setProgressBarToMarquee();
             }
 
-            if (e.Data.Contains("You won't get percentage progress"))
+            if (e.Data.Contains("inaccurate"))
             {
                 haltedRender = true;
-                setStatus("Last render was interrupted.  You won't get progress for this render.");
+                setStatus("Last render was interrupted.  You won't get detailed progress for this render.");
             }
 
-            if (!haltedRender)
+            string stripBrackets = e.Data.Replace("(", "").Replace(")", "").Replace(" ", "");
+            var progress = stripBrackets.Split(',');
+
+            if (!haltedRender && progress.Length == 3)
             {
-                //This is a 'Hack' to work with an inconsistency with overviewer
-                string stripTiles = e.Data.Replace(" tiles", "");
+                setProgressBarToContinuous();
 
-
-                //This could probably be done so much better, but I'm a noob with regular expressions so...
-                string startPattern = "[0-9]+[-][0-9]+[-][0-9]+ [0-9]+[:][0-9]+[:][0-9]+  Rendered [0-9]+ of [0-9]+.";
-                Regex startExpression = new Regex(startPattern);
-                string perPattern = "% complete";
-                Regex perExpression = new Regex(perPattern);
-
-                if (System.Text.RegularExpressions.Regex.IsMatch(stripTiles, perPattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase))
-                {
-                    foreach (String sub in startExpression.Split(stripTiles))
-                    {
-                        foreach (String per in perExpression.Split(sub))
-                        {
-                            setProgressBarToContinuous();
-                            if (per != null && per != "")
-                            {
-                                setStatus(per.Trim() + "% complete");
-                                setProgressBarPercent(Convert.ToInt16(per.Trim()));
-                            }
-                        }
-                    }
-                }
+                int percent = Convert.ToInt32(Convert.ToDouble(progress[2]));
+                setStatus(progress[0] + " / " + progress[1] + " tiles, " + percent + "% complete");
+                setProgressBarPercent(percent);
             }
-            Console.WriteLine(e.Data);
+            else
+            {
+                Console.WriteLine(e.Data);
+            }
         }
+
         private void ProcessExited(Object sender, EventArgs e)   
         {
-
-            startRender.Enabled = true;
+            setRenderEnabled(true);
             setProgressBarToContinuous();
-            renderProgress.Value = 100;
+            setProgressBarPercent(100);
 
             if (OVOutput.Text.ToLower().Contains("error"))
             {
@@ -286,53 +336,52 @@ namespace OverviewerGUI
             else
             {
                 setStatus("Render complete!");
-                MessageBox.Show("The render is complete! Go to " + outDir + " and click index.html to view it! :)");
+                if (Directory.Exists(outDir))
+                    Process.Start(outDir);
+
+                MessageBox.Show("The render is complete! Click index.html in the opened folder to view it! :)");
             }
-            
-            
         }
 
-        private String getRenderModes()
+        private List<Render> getRenderModes()
         {
-            //WALL OF IF STATEMENTS FTW
-            List<string> rendermodes = new List<string>();
+            List<Render> rendermodes = new List<Render>();
             if (normalCheck.Checked == true)
             {
-                rendermodes.Add("normal");
+                rendermodes.Add(Render.Normal);
             }
             if (lightingCheck.Checked == true)
             {
-                rendermodes.Add("lighting");
+                rendermodes.Add(Render.Lighting);
             }
             if (smoothLighingCheck.Checked == true)
             {
-                rendermodes.Add("smooth-lighting");
+                rendermodes.Add(Render.SmoothLighting);
             }
             if (caveCheck.Checked == true)
             {
-                rendermodes.Add("cave");
+                rendermodes.Add(Render.Cave);
             }
             if (nightCheck.Checked == true)
             {
-                rendermodes.Add("night");
+                rendermodes.Add(Render.Night);
             }
             if (smoothNightCheck.Checked == true)
             {
-                rendermodes.Add("smooth-night");
+                rendermodes.Add(Render.NightSmooth);
             }
-
 
             if (rendermodes.Count == 0)
             {
                 Console.WriteLine("You need to specify a rendermode! Automatically rendering normal");
-                rendermodes.Add("normal");
+                rendermodes.Add(Render.Normal);
             }
             else
             {
-                Console.WriteLine("Ok, I'll be rendering " + string.Join(",", rendermodes.ToArray()));
+                Console.WriteLine("Ok, I'll be rendering the selected render modes");
             }
 
-            return string.Join(",", rendermodes.ToArray());
+            return rendermodes;
         }
 
         private void reportError_Click(object sender, EventArgs e)
@@ -379,20 +428,24 @@ namespace OverviewerGUI
 
         private void expandCollapseButton_Click(object sender, EventArgs e)
         {
-
             if (windowExpanded)
             {
-                MainWindow.ActiveForm.Height = 359;
+                MainWindow.ActiveForm.Height = 420;
                 expandCollapseButton.Text = "Expand";
             }
             else
             {
-                MainWindow.ActiveForm.Height = 543;
+                MainWindow.ActiveForm.Height = 664;
                 expandCollapseButton.Text = "Collapse";
             }
 
             windowExpanded = !windowExpanded;
         }
 
+        private void worldNameBox_TextChanged(object sender, EventArgs e)
+        {
+            worldName = worldNameBox.Text;
+            configuration.IniWriteValue("Name", "worldName", worldNameBox.Text);
+        }
     }
 }
