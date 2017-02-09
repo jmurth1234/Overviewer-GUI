@@ -32,7 +32,7 @@ Download link?
 --------------
 [OverviewerGUI-1.3.zip][dl] (211 KB) -- 09 Feb 2017
 
-[dl]: https://github.com/downloads/rymate1234/Overviewer-GUI/OverviewerGUI-1.1.exe
+[dl]: https://github.com/rymate1234/Overviewer-GUI/releases/download/1.3/OverviewerGUI-1.3.zip
 
 Changelog
 ---------
