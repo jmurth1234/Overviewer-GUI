@@ -37,6 +37,10 @@ Download link?
 Changelog
 ---------
 
+Version 1.3.1
+
+- This fixes an issue with extracting the zip from the latest overviewer release
+
 Version 1.3
 
 -  Added the ability to download and update the Overviewer every time the GUI runs.
