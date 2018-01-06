@@ -30,9 +30,9 @@ It doesn't work!
 
 Download link?
 --------------
-[OverviewerGUI-1.3.zip][dl] (211 KB) -- 09 Feb 2017
+[OverviewerGUI-1.3.1.zip][dl] (211 KB) -- 09 Feb 2017
 
-[dl]: https://github.com/rymate1234/Overviewer-GUI/releases/download/1.3/OverviewerGUI-1.3.zip
+[dl]: https://github.com/rymate1234/Overviewer-GUI/releases/download/1.3.1/Overviewer-1.3.1.zip
 
 Changelog
 ---------
