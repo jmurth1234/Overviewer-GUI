@@ -142,17 +142,17 @@ namespace OverviewerGUI
 
                     url = (string)downloads["win64"]["url"];
                     version = (string)downloads["win64"]["version"];
-                    ovExe = "overviewer" + version + "\\overviewer.exe";
+                    ovExe = "overviewer-" + version + "\\overviewer.exe";
 
-                    if (!Directory.Exists("overviewer" + version)) { 
-                        var filename = "overviewer" + version + ".zip";
+                    if (!Directory.Exists("overviewer-" + version)) { 
+                        var filename = "overviewer-" + version + ".zip";
 
                         wc.DownloadFileAsync(new Uri(url), filename);
 
                         wc.DownloadProgressChanged += Wc_DownloadProgressChanged;
                         wc.DownloadFileCompleted += (s, a1) =>
                         {
-                            ZipFile.ExtractToDirectory(filename, "overviewer" + version);
+                            ZipFile.ExtractToDirectory(filename, ".");
 
                             setProgressBarPercent(0);
                             setStatus("Download finished, ready to render...");
@@ -268,6 +268,9 @@ namespace OverviewerGUI
             proc.ErrorDataReceived += proc_DataReceived;
             proc.OutputDataReceived += proc_DataReceived;
             proc.Start();
+
+            setStatus("Starting render...");
+            OVOutput.Text = "";
 
             if (configFile != null) outDir = "the directory specified in the config";
 
