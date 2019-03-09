@@ -1,5 +1,7 @@
-Overviewer Gui
+Overviewer GUI
 ==============
+
+![Screenshot](https://media.rymate.co.uk/file/lectical.png)
 
 What is it?
 -----------
