@@ -150,10 +150,11 @@ namespace OverviewerGUI
                 {
                     var json = wc.DownloadString("http://overviewer.org/downloads.json");
 
+                    bool is64 = System.Environment.Is64BitOperatingSystem;
                     JObject downloads = JObject.Parse(json);
 
-                    url = (string)downloads["win64"]["url"];
-                    version = (string)downloads["win64"]["version"];
+                    url = (string)downloads[is64 ? "win64" : "win32"]["url"];
+                    version = (string)downloads[is64 ? "win64" : "win32"]["version"];
                     ovExe = GetFile("overviewer-" + version + "\\overviewer.exe");
 
                     if (!Directory.Exists(GetFile("overviewer-" + version))) { 

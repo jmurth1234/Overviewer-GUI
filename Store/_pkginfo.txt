@@ -1,0 +1,1 @@
+C:\Users\Ryan\Source\Repos\Overviewer-GUI\Store\bin\x86\Release\Upload\OverviewerGUI Store_1.4.0.0\OverviewerGUI Store_1.4.0.0_x86_x64_arm_arm64.msixbundle

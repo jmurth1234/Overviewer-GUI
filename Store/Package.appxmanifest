@@ -7,13 +7,13 @@
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="overviewergui-ba40eafb-d455-4803-98e8-897d2189f604"
-    Publisher="CN=Ryan"
-    Version="1.0.0.0" />
+    Name="57221rymate1234.OverviewerGUI"
+    Publisher="CN=1459BE74-73A4-49A3-BBEB-5E81EC67EE2A"
+    Version="1.4.0.0" />
 
   <Properties>
-    <DisplayName>OverviewerGUI Store</DisplayName>
-    <PublisherDisplayName>Ryan</PublisherDisplayName>
+    <DisplayName>Overviewer GUI</DisplayName>
+    <PublisherDisplayName>rymate1234</PublisherDisplayName>
     <Logo>Images\StoreLogo.png</Logo>
   </Properties>
 
