@@ -19,7 +19,7 @@ namespace OverviewerGUI.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -62,9 +62,8 @@ namespace OverviewerGUI.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to ### begin custom observer - do not edit
-        ///from observer import Observer
+        ///from .observer import Observer
         ///
-        ///# python sucking hard
         ///globals()[&apos;Observer&apos;] = Observer
         ///
         ///class ParsableObserver(Observer):
@@ -77,9 +76,9 @@ namespace OverviewerGUI.Properties {
         ///        super(ParsableObserver, self).start(max_value)
         ///
         ///    def finish(self):
-        ///        print(self.get_max_value(),
-        ///            self.get_max_value(), 100)
-        ///        super(Parsab [rest of string was truncated]&quot;;.
+        ///        print((self.get_max_value(),
+        ///            self.get_max_value(), 100))
+        ///        super(ParsableObserver, self).fi [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Observer {
             get {

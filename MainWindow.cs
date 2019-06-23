@@ -27,7 +27,8 @@ namespace OverviewerGUI
         private Process proc = new Process();
         private Boolean haltedRender = false;
         private Boolean windowExpanded = false;
-        private IniFile configuration = new IniFile(".\\OverviewerGUI.ini");
+
+        private IniFile configuration;
         private String[] splashes = {
                 "Can't track the killers IP!",
                 "CLOOOOOOOUD",
@@ -114,12 +115,19 @@ namespace OverviewerGUI
 
         public MainWindow()
         {
+            var fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OverviewerGUI.ini");
+            configuration = new IniFile(fileName);
             InitializeComponent();
         }
 
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
         { 
             proc.Kill();
+        }
+
+        private string GetFile(string file)
+        {
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), file);
         }
 
         private void MainWindow_LoadAsync(object sender, EventArgs e)
@@ -142,17 +150,18 @@ namespace OverviewerGUI
 
                     url = (string)downloads["win64"]["url"];
                     version = (string)downloads["win64"]["version"];
-                    ovExe = "overviewer-" + version + "\\overviewer.exe";
+                    ovExe = GetFile("overviewer-" + version + "\\overviewer.exe");
 
-                    if (!Directory.Exists("overviewer-" + version)) { 
-                        var filename = "overviewer-" + version + ".zip";
+                    if (!Directory.Exists(GetFile("overviewer-" + version))) { 
+                        var file = "overviewer-" + version + ".zip";
+                        var path = GetFile(file);
 
-                        wc.DownloadFileAsync(new Uri(url), filename);
+                        wc.DownloadFileAsync(new Uri(url), path);
 
                         wc.DownloadProgressChanged += Wc_DownloadProgressChanged;
                         wc.DownloadFileCompleted += (s, a1) =>
                         {
-                            ZipFile.ExtractToDirectory(filename, ".");
+                            ZipFile.ExtractToDirectory(path, GetFile("."));
 
                             setProgressBarPercent(0);
                             setStatus("Download finished, ready to render...");
@@ -248,16 +257,18 @@ namespace OverviewerGUI
                 OutputDir = outDir
             };
 
-            File.WriteAllText("config.generated.py", config.generateConfig());
+            var file = GetFile("config.generated.py");
+            File.WriteAllText(file, config.generateConfig());
 
-            configRender("config.generated.py");
+            configRender(file);
         }
 
         private void configRender(String config)
         {
             proc = new Process();
-            proc.StartInfo.FileName = @"cmd";
-            proc.StartInfo.Arguments = "/c "+ ovExe +" --config=\"" + config + "\" ";
+            proc.StartInfo.FileName = ovExe;
+            proc.StartInfo.Arguments = "--config=\"" + config + "\" ";
+
             // set up output redirection
             proc.StartInfo.RedirectStandardOutput = true;
             proc.StartInfo.RedirectStandardError = true;
@@ -277,7 +288,6 @@ namespace OverviewerGUI
             proc.BeginErrorReadLine();
             proc.BeginOutputReadLine();
             proc.Exited += new EventHandler(ProcessExited);
-
         }
 
         private void configButton_Click_1(object sender, EventArgs e)
@@ -308,8 +318,18 @@ namespace OverviewerGUI
                 setStatus("Last render was interrupted.  You won't get detailed progress for this render.");
             }
 
+            if (e.Data.Contains("Press [Enter]"))
+            {
+                proc.Kill();
+            }
+
             string stripBrackets = e.Data.Replace("(", "").Replace(")", "").Replace(" ", "");
             var progress = stripBrackets.Split(',');
+
+            if (progress.Length == 3)
+            {
+                haltedRender = false;
+            }
 
             if (!haltedRender && progress.Length == 3)
             {

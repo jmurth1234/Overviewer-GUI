@@ -119,9 +119,8 @@
   </resheader>
   <data name="Observer" xml:space="preserve">
     <value>### begin custom observer - do not edit
-from observer import Observer
+from .observer import Observer
 
-# python sucking hard
 globals()['Observer'] = Observer
 
 class ParsableObserver(Observer):
@@ -134,14 +133,14 @@ class ParsableObserver(Observer):
         super(ParsableObserver, self).start(max_value)
 
     def finish(self):
-        print(self.get_max_value(),
-            self.get_max_value(), 100)
+        print((self.get_max_value(),
+            self.get_max_value(), 100))
         super(ParsableObserver, self).finish()
 
     def update(self, current_value):
         super(ParsableObserver, self).update(current_value)
-        print(self.get_current_value(), self.get_max_value(),
-            self.get_percentage())
+        print((self.get_current_value(), self.get_max_value(),
+            self.get_percentage()))
 
 globals()['ParsableObserver'] = ParsableObserver
 

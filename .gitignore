@@ -2,3 +2,4 @@ bin
 obj
 sh
 /.vs/OverviewerGUI/v15/Server/sqlite3
+/.vs
