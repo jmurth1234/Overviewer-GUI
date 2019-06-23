@@ -115,8 +115,6 @@ namespace OverviewerGUI
 
         public MainWindow()
         {
-            var fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OverviewerGUI.ini");
-            configuration = new IniFile(fileName);
             InitializeComponent();
         }
 
@@ -127,16 +125,22 @@ namespace OverviewerGUI
 
         private string GetFile(string file)
         {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), file);
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OverviewerGUI", file);
         }
 
         private void MainWindow_LoadAsync(object sender, EventArgs e)
         {
+            var fileName = GetFile("OverviewerGUI.ini");
+            Debug.WriteLine(fileName);
+            Directory.CreateDirectory(GetFile(""));
+            configuration = new IniFile(fileName);
+
             // Instantiate the writer
             _writer = new ConsoleRedirect(OVOutput);
             // Redirect the out Console stream
             Console.SetOut(_writer);
-            Console.WriteLine("Now redirecting output to the text box");
+            Console.WriteLine("Saved config in " + fileName);
+
             this.Text = "Overviewer GUI - " + getSplash();
 
             try
