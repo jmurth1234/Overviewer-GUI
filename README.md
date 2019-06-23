@@ -32,12 +32,18 @@ It doesn't work!
 
 Download link?
 --------------
-[OverviewerGUI-1.3.1.zip][dl] (211 KB) -- 09 Feb 2017
+[OverviewerGUI-1.4.zip][dl] (266 KB) -- 23 June 2019
 
-[dl]: https://github.com/rymate1234/Overviewer-GUI/releases/download/1.3.1/Overviewer-1.3.1.zip
+[dl]: https://github.com/rymate1234/Overviewer-GUI/releases/download/v1.4.0/OverviewerGUI-1.4.zip
 
 Changelog
 ---------
+
+Version 1.4
+
+- Updates the observable to support the new Python 3 Overviewer
+- Initial Store release coming soon! The ini file and the generated config is now stored in the AppData folder as a result.
+  - I'll be adding a way to save the config outside the folder
 
 Version 1.3.1
 
