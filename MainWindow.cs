@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
+using System.Net;
+using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Diagnostics;
-using System.IO;
-using System.Net;
+
 using Ini;
+
 using Newtonsoft.Json.Linq;
-using System.Security.Policy;
-using System.IO.Compression;
+using OverviewerGUI.Core;
+using OverviewerGUI.Core.Models;
 
 namespace OverviewerGUI
 {
@@ -119,13 +123,18 @@ namespace OverviewerGUI
         }
 
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
-        { 
+        {
             proc.Kill();
         }
 
         private string GetFile(string file)
         {
             return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OverviewerGUI", file);
+        }
+
+        private string GetOverviewer(string file)
+        {
+            return Path.Combine(configuration.IniReadValue("Settings", "OverviewerFolder"), file);
         }
 
         private void MainWindow_LoadAsync(object sender, EventArgs e)
@@ -143,37 +152,42 @@ namespace OverviewerGUI
 
             this.Text = "Overviewer GUI - " + getSplash();
 
-            try
+
+            if (configuration.IniReadValue("Settings", "ManageInstall") == "")
             {
-                //Download the latest overviewer
-                using (WebClient wc = new WebClient())
+                var confirmResult = MessageBox.Show
+                (
+                    "Do you want the Overvewer GUI to automatically manage your Overviewer installation?",
+                    "",
+                    MessageBoxButtons.YesNo
+                );
+
+                if (confirmResult == DialogResult.Yes)
                 {
-                    var json = wc.DownloadString("http://overviewer.org/downloads.json");
+                    configuration.IniWriteValue("Settings", "ManageInstall", "Y");
+                }
+                else
+                {
+                    configuration.IniWriteValue("Settings", "ManageInstall", "N");
+                }
+            }
 
-                    bool is64 = System.Environment.Is64BitOperatingSystem;
-                    JObject downloads = JObject.Parse(json);
+            while (configuration.IniReadValue("Settings", "OverviewerFolder") == "")
+            {
+                using (var fbd = new FolderBrowserDialog())
+                {
+                    fbd.ShowNewFolderButton = true;
+                    fbd.Description = "Please set where the overviewer is downloaded to";
+                    DialogResult result = fbd.ShowDialog();
 
-                    url = (string)downloads[is64 ? "win64" : "win32"]["url"];
-                    version = (string)downloads[is64 ? "win64" : "win32"]["version"];
-                    ovExe = GetFile("overviewer-" + version + "\\overviewer.exe");
-
-                    if (!Directory.Exists(GetFile("overviewer-" + version))) { 
-                        var file = "overviewer-" + version + ".zip";
-                        var path = GetFile(file);
-
-                        wc.DownloadFileAsync(new Uri(url), path);
-
-                        wc.DownloadProgressChanged += Wc_DownloadProgressChanged;
-                        wc.DownloadFileCompleted += (s, a1) =>
-                        {
-                            ZipFile.ExtractToDirectory(path, GetFile("."));
-
-                            setProgressBarPercent(0);
-                            setStatus("Download finished, ready to render...");
-                        };
+                    if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                    {
+                        configuration.IniWriteValue("Settings", "OverviewerFolder", fbd.SelectedPath);
                     }
                 }
-            } catch { }
+            }
+
+            manageInstall();
 
             //Configuration initialization
             var configWorldName = configuration.IniReadValue("Name", "worldName");
@@ -196,6 +210,59 @@ namespace OverviewerGUI
             {
                 outputFolder.Text = configOutPath;
                 outDir = configOutPath;
+            }
+        }
+
+        private void manageInstall()
+        {
+            if (configuration.IniReadValue("Settings", "ManageInstall") == "Y")
+            {
+                try
+                {
+                    //Download the latest overviewer
+                    using (WebClient wc = new WebClient())
+                    {
+                        var json = wc.DownloadString("http://overviewer.org/downloads.json");
+
+                        bool is64 = System.Environment.Is64BitOperatingSystem;
+                        JObject downloads = JObject.Parse(json);
+
+                        url = (string)downloads[is64 ? "win64" : "win32"]["url"];
+                        version = (string)downloads[is64 ? "win64" : "win32"]["version"];
+                        ovExe = GetOverviewer("overviewer-" + version + "\\overviewer.exe");
+
+                        if (!Directory.Exists(GetOverviewer("overviewer-" + version)))
+                        {
+                            var file = "overviewer-" + version + ".zip";
+                            var path = GetOverviewer(file);
+
+                            wc.DownloadFileAsync(new Uri(url), path);
+
+                            wc.DownloadProgressChanged += Wc_DownloadProgressChanged;
+                            wc.DownloadFileCompleted += (s, a1) =>
+                            {
+                                ZipFile.ExtractToDirectory(path, GetOverviewer("."));
+
+                                setProgressBarPercent(0);
+                                setStatus("Download finished, ready to render...");
+                            };
+                        }
+                    }
+                }
+                catch { }
+            }
+            else
+            {
+                ovExe = GetOverviewer("overviewer.exe");
+
+                if (!File.Exists(ovExe))
+                {
+                    MessageBox.Show(
+                        "The overviewer.exe is missing in " + ovExe + "\n" +
+                        "Please make sure one exists before starting a render",
+                        "Overviewer EXE missing", MessageBoxButtons.OK
+                    );
+                }
             }
         }
 
@@ -254,12 +321,16 @@ namespace OverviewerGUI
 
         private void simpleRender(string worldDir, string outDir)
         {
-            OverviewerConfigGenerator config = new OverviewerConfigGenerator()
+            var world = new World()
             {
                 WorldName = worldName,
-                WorldPath = worldDir, 
-                RenderModes = getRenderModes(), 
-                OutputDir = outDir
+                WorldPath = worldDir,
+                RenderModes = getRenderModes()
+            };
+            var config = new OverviewerConfigGenerator()
+            {
+                OutputDir = outDir,
+                Worlds = new List<World> { world }
             };
 
             var file = GetFile("config.generated.py");
@@ -350,7 +421,7 @@ namespace OverviewerGUI
             }
         }
 
-        private void ProcessExited(Object sender, EventArgs e)   
+        private void ProcessExited(Object sender, EventArgs e)
         {
             setRenderEnabled(true);
             setProgressBarToContinuous();
@@ -371,38 +442,38 @@ namespace OverviewerGUI
             }
         }
 
-        private List<Render> getRenderModes()
+        private List<RenderType> getRenderModes()
         {
-            List<Render> rendermodes = new List<Render>();
+            List<RenderType> rendermodes = new List<RenderType>();
             if (normalCheck.Checked == true)
             {
-                rendermodes.Add(Render.Normal);
+                rendermodes.Add(RenderType.Normal);
             }
             if (lightingCheck.Checked == true)
             {
-                rendermodes.Add(Render.Lighting);
+                rendermodes.Add(RenderType.Lighting);
             }
             if (smoothLighingCheck.Checked == true)
             {
-                rendermodes.Add(Render.SmoothLighting);
+                rendermodes.Add(RenderType.SmoothLighting);
             }
             if (caveCheck.Checked == true)
             {
-                rendermodes.Add(Render.Cave);
+                rendermodes.Add(RenderType.Cave);
             }
             if (nightCheck.Checked == true)
             {
-                rendermodes.Add(Render.Night);
+                rendermodes.Add(RenderType.Night);
             }
             if (smoothNightCheck.Checked == true)
             {
-                rendermodes.Add(Render.NightSmooth);
+                rendermodes.Add(RenderType.NightSmooth);
             }
 
             if (rendermodes.Count == 0)
             {
                 Console.WriteLine("You need to specify a rendermode! Automatically rendering normal");
-                rendermodes.Add(Render.Normal);
+                rendermodes.Add(RenderType.Normal);
             }
             else
             {

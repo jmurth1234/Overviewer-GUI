@@ -1,2 +1,0 @@
-MainPackage=C:\Users\Ryan\Source\Repos\Overviewer-GUI\Store\bin\x86\Release\OverviewerGUI Store_1.4.0.0_x86.msix
-SymbolPackage=C:\Users\Ryan\Source\Repos\Overviewer-GUI\Store\obj\x86\Release\Symbols\OverviewerGUI Store_1.4.0.0_x86.appxsym

@@ -11,7 +11,7 @@
     <PackageLogoSource>C:\Users\Ryan\Downloads\Untitled - Copy.png</PackageLogoSource>
     <AppxShowAllApps>False</AppxShowAllApps>
     <UapAppxPackageBuildMode>StoreOnly</UapAppxPackageBuildMode>
-    <AppxBuildConfigurationSelection>x86|x64|arm|arm64</AppxBuildConfigurationSelection>
+    <AppxBuildConfigurationSelection>neutral</AppxBuildConfigurationSelection>
     <PackageOptionalProjectsInIdeBuilds>False</PackageOptionalProjectsInIdeBuilds>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
