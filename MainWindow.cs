@@ -333,7 +333,7 @@ namespace OverviewerGUI
                 Worlds = new List<World> { world }
             };
 
-            var file = GetFile("config.generated.py");
+            var file = GetOverviewer("config.generated.py");
             File.WriteAllText(file, config.generateConfig());
 
             configRender(file);
