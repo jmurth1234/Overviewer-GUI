@@ -3,3 +3,6 @@ obj
 sh
 /.vs/OverviewerGUI/v15/Server/sqlite3
 /.vs
+Store/AppPackages
+Store/BundleArtifacts
+

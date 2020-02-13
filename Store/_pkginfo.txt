@@ -1,1 +1,1 @@
-C:\Users\Ryan\Source\Repos\Overviewer-GUI\Store\bin\AnyCPU\Release\Upload\OverviewerGUI Store_1.4.0.0\OverviewerGUI Store_1.4.0.0_AnyCPU.msixbundle
+C:\Users\Ryan\Source\Repos\Overviewer-GUI\Store\bin\AnyCPU\Release\Upload\OverviewerGUI Store_1.4.1.0\OverviewerGUI Store_1.4.1.0_AnyCPU.msixbundle

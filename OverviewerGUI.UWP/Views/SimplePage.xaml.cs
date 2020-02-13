@@ -13,6 +13,7 @@ namespace OverviewerGUI.UWP.Views
             get { return ViewModelLocator.Current.SimpleViewModel; }
         }
 
+
         public SimplePage()
         {
             InitializeComponent();

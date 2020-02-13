@@ -1,6 +1,7 @@
 ﻿using System;
 
 using GalaSoft.MvvmLight;
+using OverviewerGUI.Core.Models;
 
 namespace OverviewerGUI.UWP.ViewModels
 {
@@ -9,5 +10,6 @@ namespace OverviewerGUI.UWP.ViewModels
         public AdvancedViewModel()
         {
         }
+
     }
 }
