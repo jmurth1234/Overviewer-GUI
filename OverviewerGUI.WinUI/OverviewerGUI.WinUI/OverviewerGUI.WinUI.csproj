@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp5.0</TargetFramework>
+    <TargetPlatformVersion>10.0.18362.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
+    <RootNamespace>OverviewerGUI.WinUI</RootNamespace>
+
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Platforms>AnyCPU;x86;x64</Platforms>
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
+    <RuntimeIdentifier>win-$(Platform)</RuntimeIdentifier>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VCRTForwarders.140" Version="1.0.6" />
+    <PackageReference Include="Microsoft.WinUI" Version="3.0.0-preview1.200515.3" />
+    <PackageReference Include="MvvmLight" Version="5.4.1.1" />
+    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+    <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="App.xaml" />
+    <None Remove="Components\FileSelector.xaml" />
+    <None Remove="Components\ProgressArea.xaml" />
+    <None Remove="MainWindow.xaml" />
+    <None Remove="Pages\SimplePage.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\OverviewerGUI.UWP.Core\OverviewerGUI.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Components\FileSelector.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Components\ProgressArea.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\SimplePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+</Project>

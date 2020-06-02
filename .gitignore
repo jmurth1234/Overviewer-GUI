@@ -5,4 +5,5 @@ sh
 /.vs
 Store/AppPackages
 Store/BundleArtifacts
-
+packages
+**/build

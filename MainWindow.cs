@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
@@ -442,9 +443,9 @@ namespace OverviewerGUI
             }
         }
 
-        private List<RenderType> getRenderModes()
+        private ObservableCollection<RenderType> getRenderModes()
         {
-            List<RenderType> rendermodes = new List<RenderType>();
+            var rendermodes = new ObservableCollection<RenderType>();
             if (normalCheck.Checked == true)
             {
                 rendermodes.Add(RenderType.Normal);
